@@ -1,0 +1,103 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --font-title: "Libertinus Math", system-ui;
+    --font-text: "Montserrat", system-ui;
+    
+    --color-background: #F4C27A;
+    --color-title: #5B2C12;
+    --color-text: #7A3E1D;
+    --color-details: #F97316;
+    --color-hovers: #FB923C;
+    --color-cards-background: #F5F5F4;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.body{
+    background-image: url("../imgs/backgroundImg.png");
+    background-repeat: repeat;
+    color: var(--color-text);
+}
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: .5rem;
+    text-align: center;   
+    text-transform: uppercase;
+    font-weight: 600; 
+    font-size: .75rem;    
+    background-color: var(--color-background);
+    color: var(--color-title);  
+}
+
+.nav-list li {
+    display: inline-block;        
+    margin: 0 1rem;               
+}
+  
+.nav-list a {
+    text-decoration: none;
+    color: inherit;
+    padding: 0.4rem 1rem;
+    display: inline-block;        
+}
+
+.hero {
+    position: relative;
+    min-height: 120vh;
+    display: flex;
+    flex-direction: column;
+
+    background-image: url("../imgs/heroImg2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(0,0,0,1) 75%,
+        rgba(0,0,0,0) 100%
+    );
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;   
+    justify-content: center;
+    padding-top: 10vh;        
+}
+
+
+#heroLogo {
+    height: auto;
+    max-width: 80%;
+    z-index: 10;
+}
+
+#heroBackground{
+    z-index: -10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+
