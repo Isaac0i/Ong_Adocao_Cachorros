@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Toca dos Peludos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <h1>Fomulario</h1>
+    <form action="{% url 'forms' %}" method='POST'> {% csrf_token %}
+        <label>Nome Completo</label>
+        <input type="text" placeholder="Nome Completo" class="form-control" name="nome">
+        <br>
+        <label>E-mail</label>
+        <input type="text" placeholder="E-mail" class="form-control" name="email">
+        <br>
+        <label>Telefone</label>
+        <input type="text" placeholder="(11) 90000-0000" class="form-control" name="telefone">
+        <br>
+        <label>Endereço</label>
+        <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
+        <br>
+        <input type="submit" class="btn btn-success" value="Enviar">
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
