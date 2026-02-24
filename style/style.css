@@ -190,3 +190,42 @@ footer {
     line-height: 1.7;
   
 }
+
+.cards_infos{
+    display: inline-flex;
+    list-style: none;
+}
+
+.cardsI {
+    display: inline-block;
+    background-color: var(--color-cards-background);
+    border-radius: .5rem;
+    height: 12rem;
+    width: 23rem;
+    margin: 1rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-top: #D97706 4px solid;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.cardsI > h3 {
+    font-family: var(--font-title), serif;
+    color: var(--color-title);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+
+.cardsI:hover {
+    box-shadow: 0 0 10px rgba(245, 78, 1, 0.5);
+    transition: all .3s ease-in-out;
+    transform: scale(1.01);
+}
+
+.cardsI_img{
+    width: 3rem;
+    height: 3rem;
+}
