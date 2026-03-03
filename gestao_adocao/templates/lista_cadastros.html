@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,23 +10,26 @@
 
   <body>
     <h1>Lista de Cadastros</h1>
-
-    <table class="table">
+    <table class="table" action="{% url 'lista_cadastros' %}"> {% csrf_token %}
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nome Completo</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Endereço</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
+            {% for dados in cadastros %}
+                <tr> 
+                    <th>{{ dados.id }}</th>
+                    <td>{{ dados.nome_completo}}</td>
+                    <td>{{ dados.email }}</td>
+                    <td>{{ dados.telefone }}</td>
+                    <td>{{ dados.endereco }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

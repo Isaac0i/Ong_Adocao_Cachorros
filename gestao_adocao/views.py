@@ -10,10 +10,14 @@ def forms(request):
     elif request.method == 'POST':
         nome_completo = request.POST.get('nome')
         email= request.POST.get('email')
+        telefone = request.POST.get('telefone')
+        endereco = request.POST.get('endereco')
 
         dados = Adotante(   
             nome_completo = nome_completo,
             email = email,
+            telefone = telefone,
+            endereco = endereco,
         )
 
         dados.save()
