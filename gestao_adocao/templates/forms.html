@@ -9,7 +9,7 @@
 
   <body>
     <h1>Fomulario</h1>
-    <form action="{% url 'forms' %}" method='POST'> {% csrf_token %}
+    <form action="{% url 'forms' %}" method='POST' enctype="multipart/form-data"> {% csrf_token %}
         <label>Nome Completo</label>
         <input type="text" placeholder="Nome Completo" class="form-control" name="nome">
         <br>
@@ -21,6 +21,12 @@
         <br>
         <label>Endereço</label>
         <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
+        <br>
+        <label>Documento de Identificação</label>
+        <input type="file" name="documento">
+        <br>
+        <label>Fotos da sua Moradia</label>
+        <input type="file" name="fotos_moradia">
         <br>
         <input type="submit" class="btn btn-success" value="Enviar">
 
