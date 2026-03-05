@@ -18,8 +18,15 @@
                 <th scope="col">Email</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Endereço</th>
+                <th scope="col">Tipo de moradia</th>
+                <th scope="col">Possui outros pets?</th>
+                <th scope="col">Motivo de adoção</th>
                 <th scope="col">Documento de Identifcação</th>
+                <th scope="col">Status</th>
+                <th scope="col">Criado em:</th>
+                <th scope="col">Atualizado em:</th>
                 <th scope="col">Imagem da Moradia</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -30,8 +37,22 @@
                     <td>{{ dados.email }}</td>
                     <td>{{ dados.telefone }}</td>
                     <td>{{ dados.endereco }}</td>
-                    <td>{{ dados.doc_identificacao }}</td>
-                    #falta retornar imagem da moradia
+                    <td>-<!-- Retornar = Tipo de moradia --></td> 
+                    <td>-<!-- Retornar = Possui outros pets? --></td> 
+                    <td>-<!-- Retornar = Motivo de adoção --></td> 
+                    <td>
+                        <a href="{{ dados.doc_identificacao.url }}" target="_blank">Ver Documento</a>                      
+                    </td>
+                    <td>-<!-- Retornar = Status --></td>
+                    <td>-<!-- Retornar = Criado em: --></td>
+                    <td>-<!-- Retornar = Atualizado em: --></td>
+                    <td>
+                        {% for foto in dados.fotos.all %}
+                            <!--<img src="{{foto.foto.url}}" width="150px"> -->
+                            <a href={{ foto.foto.url}} target="_blank">Ver Foto</a>
+                        {% endfor %}
+                    </td>
+                    
                 </tr>
             {% endfor %}
         </tbody>
