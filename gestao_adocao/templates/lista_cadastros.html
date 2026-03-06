@@ -20,6 +20,7 @@
                 <th scope="col">Endereço</th>
                 <th scope="col">Tipo de moradia</th>
                 <th scope="col">Possui outros pets?</th>
+                <th scope="col">Já teve experiência com cães antes?</th>
                 <th scope="col">Motivo de adoção</th>
                 <th scope="col">Documento de Identifcação</th>
                 <th scope="col">Status</th>
@@ -37,15 +38,16 @@
                     <td>{{ dados.email }}</td>
                     <td>{{ dados.telefone }}</td>
                     <td>{{ dados.endereco }}</td>
-                    <td>-<!-- Retornar = Tipo de moradia --></td> 
-                    <td>-<!-- Retornar = Possui outros pets? --></td> 
-                    <td>-<!-- Retornar = Motivo de adoção --></td> 
+                    <td>{{ dados.get_tipo_moradia_display }}</td> 
+                    <td>{{ dados.get_possui_outros_pets_display }}</td> 
+                    <td>{{ dados.get_experiencia_caes_display }}</td>
+                    <td>{{ dados.motivo_adocao }}</td> 
                     <td>
                         <a href="{{ dados.doc_identificacao.url }}" target="_blank">Ver Documento</a>                      
                     </td>
                     <td>-<!-- Retornar = Status --></td>
-                    <td>-<!-- Retornar = Criado em: --></td>
-                    <td>-<!-- Retornar = Atualizado em: --></td>
+                    <td>-{{ dados.criado_em }}</td>
+                    <td>-{{ dados.atualizado_em }}</td>
                     <td>
                         {% for foto in dados.fotos.all %}
                             <!--<img src="{{foto.foto.url}}" width="150px"> -->

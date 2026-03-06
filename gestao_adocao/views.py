@@ -18,6 +18,7 @@ def forms(request):
         endereco = request.POST.get('endereco')
         tipo_moradia = request.POST.get('tipo_moradia')
         possui_outros_pets = request.POST.get('possui_outros_pets')
+        experiencia_caes = request.POST.get('experiencia_caes')
         motivo_adocao = request.POST.get('motivo_adocao')
         doc_identificacao = request.FILES.get("documento")
         criado_em = request.POST.get("criado_em")
@@ -31,6 +32,7 @@ def forms(request):
             endereco = endereco,
             tipo_moradia = tipo_moradia,
             possui_outros_pets = possui_outros_pets,
+            experiencia_caes = experiencia_caes,
             motivo_adocao = motivo_adocao,
             doc_identificacao = doc_identificacao,
             criado_em = criado_em,

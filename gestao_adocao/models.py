@@ -9,12 +9,19 @@ class Adotante(models.Model):
         ('chacara', 'Chácara'),
     ]
 
+    OPCOES = [
+        ('sim', 'Sim'),
+        ('nao', 'Não'),
+    ]
+ 
+
     STATUS_CHOICES = [
         ('em_analise',  'Aguardando Análise'),
         ('aprovado', 'Aprovado'),
         ('reprovado', 'Reprovado'),
     ]
- 
+
+
     # Dados pessoais
     nome_completo = models.CharField(max_length=255)
     email = models.EmailField()
@@ -23,7 +30,8 @@ class Adotante(models.Model):
 
     # Informações sobre moradia e pets
     tipo_moradia = models.CharField(max_length=20, choices=TIPO_MORADIA_CHOICES)
-    possui_outros_pets = models.BooleanField()
+    possui_outros_pets = models.CharField(max_length=3 ,choices=OPCOES)
+    experiencia_caes = models.CharField(max_length=3 ,choices=OPCOES)
     motivo_adocao = models.TextField()
 
     # Documento de Identificação do Usuário
