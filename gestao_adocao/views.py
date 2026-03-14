@@ -5,6 +5,10 @@ import os
 from django.conf import settings
 from datetime import date
 
+def index(request):
+    if request.method == 'GET':
+        return render(request, 'index.html')
+
 def forms(request):
     if request.method == 'GET':
         status = request.GET.get('status')
