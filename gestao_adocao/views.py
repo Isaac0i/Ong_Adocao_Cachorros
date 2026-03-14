@@ -53,8 +53,12 @@ def forms(request):
 
     
 def lista_cadastros(request):
-    cadastros = Adotante.objects.all().prefetch_related('fotos')
-    return render(request, 'lista_cadastros.html', {'cadastros': cadastros,})
+    cadastro = Adotante.objects.all().prefetch_related('fotos')
+    return render(request, 'admin.html', {'cadastro': cadastro,})
+
+def user(request, id):
+    cadastro = Adotante.objects.all().prefetch_related('fotos').get(id=id)
+    return render(request, 'user.html', {'cadastro': cadastro,})
 
     
     
