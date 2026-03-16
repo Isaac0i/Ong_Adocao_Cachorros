@@ -1,3 +1,4 @@
+/* Zerando os estilos padrões do navegador*/
 *{
     box-sizing: border-box;
     padding: 0;
@@ -5,6 +6,7 @@
     font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Definição da variaveis de css*/
 :root {
     --font-title: "Libertinus Math", system-ui;
     --font-text: "Montserrat", system-ui;
@@ -37,9 +39,11 @@ body{
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .nav-list {
+    width: 100%;
     list-style: none;
     padding: .5rem;
     text-align: center;
@@ -52,6 +56,7 @@ body{
 
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -62,7 +67,7 @@ body{
     padding: 0.4rem 1rem;
 }
 
-/* HERO */
+/*  HERO */
 
 .hero {
     position: relative;
@@ -95,7 +100,7 @@ body{
     max-width: 80%;
 }
 
-/* SECTIONS */
+/* Infos da ong */
 
 section {
     text-align: center;
@@ -200,9 +205,82 @@ footer {
     line-height: 1.7;
 }
 
+/* Tabela da Pagina ADM */
+
+.tableContainer{
+    width:100%;
+    overflow-x:auto;
+}
+
+.infosTable{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+#admTable{
+    width: 98%;
+    max-width: 1500px;
+    background-color: var(--color-cards-background);
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Cabeçalho */
+
+#admTable thead th{
+    background-color: var(--color-title);
+    color: white;
+    font-weight: 600;
+    padding: 14px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Corpo da tabela */
+
+#admTable tbody td,
+#admTable tbody th{
+    text-align: center;
+    padding: 12px;
+    font-size: 0.9rem;
+}
+
+/* Linhas */
+
+#admTable tbody tr{
+    background-color: var(--color-wtext);
+    transition: background .2s ease;
+}
+
+#admTable tbody tr:nth-child(even){
+    background-color: #f6f6f6;
+}
+
+#admTable tbody tr:hover{
+    background-color: #f1f77d;
+}
+
+#admTable a{
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-details);
+}
+
+#admTable a:hover{
+    color: var(--color-hovers);
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 768px){
+
+    #admTable{
+        min-width:700px;
+    }
 
     #aboutUs h2,
     #dogs h2{
