@@ -1,0 +1,364 @@
+/* ========================
+   VARIÁVEIS & RESET
+======================== */
+:root {
+    --cream: #fdf6ee;
+    --orange: #e8825a;
+    --orange-light: #f5a882;
+    --orange-dark: #c4623d;
+    --green: #4a9e7f;
+    --green-dark: #377a62;
+    --red: #d95f5f;
+    --red-dark: #b84343;
+    --text-dark: #2d2417;
+    --text-mid: #6b5744;
+    --text-light: #9c8272;
+    --border: #e8d8c8;
+    --card-bg: #ffffff;
+    --shadow: 0 2px 12px rgba(100, 60, 20, 0.08);
+    --radius: 16px;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding-bottom: 100px;
+    background-image: url("../imgs/backgroundImg.png");
+    background-repeat: repeat;
+}
+
+/* ========================
+   LAYOUT
+======================== */
+.page-wrapper {
+    width: 100%;
+    padding: 24px 32px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ========================
+   HEADER
+======================== */
+.page-header {
+    margin-bottom: 24px;
+}
+
+.back-link {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--orange);
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.header-title h1 {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.status-badge {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.status-pendente {
+    background: #fff3e0;
+    color: #b86a00;
+    border: 1px solid #f5c07a;
+}
+
+.status-aprovado {
+    background: #e6f4ee;
+    color: var(--green-dark);
+    border: 1px solid #a8d9c2;
+}
+
+.status-reprovado {
+    background: #fdecea;
+    color: var(--red-dark);
+    border: 1px solid #f2b8b8;
+}
+
+/* ========================
+   CARDS
+======================== */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-icon {
+    font-size: 18px;
+}
+
+.card-header h2 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--orange-dark);
+}
+
+/* ========================
+   FIELDS / GRID
+======================== */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.field--full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-light);
+}
+
+.field p {
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* ========================
+   TAGS
+======================== */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 0;
+}
+
+.tag--sim {
+    color: var(--green);
+}
+
+.tag--sim::before {
+    content: '✓';
+    font-weight: 700;
+}
+
+.tag--nao {
+    color: var(--text-light);
+}
+
+.tag--nao::before {
+    content: '✕';
+}
+
+/* ========================
+   MOTIVO TEXT
+======================== */
+.motivo-text {
+    background: #fdf0e8;
+    border-left: 3px solid var(--orange-light);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-style: italic;
+}
+
+/* ========================
+   DOCUMENTO
+======================== */
+.thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.thumb:hover {
+    border-color: var(--orange);
+    transform: scale(1.03);
+}
+
+.btn-visualizar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-visualizar:hover {
+    background: var(--orange-dark);
+    transform: translateY(-1px);
+}
+
+/* ========================
+   FOTOS GRID
+======================== */
+.fotos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.foto-moradia {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.foto-moradia:hover {
+    border-color: var(--orange);
+    transform: scale(1.02);
+}
+
+.empty-msg {
+    color: var(--text-light);
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* ========================
+   ACTION BAR
+======================== */
+.action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    box-shadow: 0 -4px 20px rgba(100, 60, 20, 0.08);
+    z-index: 100;
+}
+
+.btn-rejeitar,
+.btn-aprovar {
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+}
+
+.btn-rejeitar {
+    background: #fdecea;
+    color: var(--red-dark);
+    border: 1px solid #f2b8b8;
+}
+
+.btn-rejeitar:hover {
+    background: var(--red);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-aprovar {
+    background: var(--green);
+    color: white;
+}
+
+.btn-aprovar:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+}
+
+/* ========================
+   RESPONSIVO
+======================== */
+@media (max-width: 520px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-title h1 {
+        font-size: 22px;
+    }
+
+    .fotos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -317,3 +317,10 @@ footer {
     }
 
 }
+
+/*Pagina User*/
+.modal {
+    width: 150px;
+    cursor: pointer;
+    margin: 5px;
+}
