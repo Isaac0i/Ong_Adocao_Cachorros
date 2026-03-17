@@ -1,37 +1,174 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Usuario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/user.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Informações do Usuario</title>
+</head>
+<body>
 
+    <div class="page-wrapper">
 
-  <body>
-    <h1>{{ cadastro.nome_completo }}</h1>
+        <!-- Header -->
+        <header class="page-header">
+            <a href="{% url 'admin' %}" class="back-link">← Voltar ao Painel</a>
+            <div class="header-title">
+                <h1>{{ cadastro.nome_completo }}</h1>
+                <span class="status-badge status-pendente">Aguardando Análise</span>
+            </div>
+        </header>
 
-    <p><strong>Email:</strong> {{ cadastro.email }}</p>
-    <p><strong>Telefone:</strong> {{ cadastro.telefone }}</p>
-    <p><strong>Endereço:</strong> {{ cadastro.endereco }}</p>
-    <p><strong>Tipo de Moradia:</strong> {{ cadastro.get_tipo_moradia_display }}</p>
-    <p><strong>Possui outros pets:</strong> {{ cadastro.get_possui_outros_pets_display }}</p>
-    <p><strong>Experiência com cães:</strong> {{ cadastro.get_experiencia_caes_display }}</p>
-    <p><strong>Motivo da adoção:</strong> {{ cadastro.motivo_adocao }}</p>
-    <p><strong>Documento de Identificação:</strong><img src="{{ cadastro.doc_identificacao.url }}" width="300px"></p>
-    <p><strong>Cadastrado em:</strong> {{ cadastro.criado_em }}</p>
-    <p><strong>Atualizado em:</strong> {{ cadastro.atualizado_em }}</p>
-    <h3>Fotos da Moradia:</h3>
-    {% for foto in cadastro.fotos.all %}
-        <img src="{{ foto.foto.url }}" width="300px">
-        <br>
-        <br>
-        <br>
-    {% endfor %}
+        <div class="content">
 
-    <a href="{% url 'admin' %}" class="btn btn-secondary">Voltar</a>
+            <!-- Informações Pessoais -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-icon">🐾</span>
+                    <h2>Informações Pessoais</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="field">
+                        <label>Nome Completo</label>
+                        <p>{{ cadastro.nome_completo }}</p>
+                    </div>
+                    <div class="field">
+                        <label>E-mail</label>
+                        <p>{{ cadastro.email }}</p>
+                    </div>
+                    <div class="field">
+                        <label>Telefone</label>
+                        <p>{{ cadastro.telefone }}</p>
+                    </div>
+                    <div class="field">
+                        <label>Endereço</label>
+                        <p>{{ cadastro.endereco }}</p>
+                    </div>
+                    <div class="field">
+                        <label>Cadastrado em</label>
+                        <p>{{ cadastro.criado_em }}</p>
+                    </div>
+                </div>
+            </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+            <!-- Informações de Moradia -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-icon">🏠</span>
+                    <h2>Informações de Moradia</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="field">
+                        <label>Tipo de Moradia</label>
+                        <p>{{ cadastro.get_tipo_moradia_display }}</p>
+                    </div>
+                    <div class="field">
+                        <label>Possui Outros Pets</label>
+                        <p class="tag tag--{{ cadastro.possui_outros_pets }}">{{ cadastro.get_possui_outros_pets_display }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experiência -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-icon">🐶</span>
+                    <h2>Experiência com Cães</h2>
+                </div>
+                <div class="card-grid">
+                    <div class="field">
+                        <label>Experiência prévia</label>
+                        <p class="tag tag--{{ cadastro.experiencia_caes }}">{{ cadastro.get_experiencia_caes_display }}</p>
+                    </div>
+                    <div class="field field--full">
+                        <label>Motivo da Adoção</label>
+                        <p class="motivo-text">{{ cadastro.motivo_adocao }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documentação -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-icon">📄</span>
+                    <h2>Documentação</h2>
+                </div>
+                <div class="field">
+                    <label>Documento de Identidade</label>
+                    <img src="{{ cadastro.doc_identificacao.url }}"
+                         class="thumb"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalDocumento"
+                         alt="Documento">
+                    <button class="btn-visualizar"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalDocumento">
+                        📎 Visualizar Documento
+                    </button>
+                </div>
+            </section>
+
+            <!-- Fotos da Residência -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-icon">📷</span>
+                    <h2>Fotos da Residência</h2>
+                </div>
+                <div class="fotos-grid">
+                    {% for foto in cadastro.fotos.all %}
+                        <img src="{{ foto.foto.url }}"
+                             class="foto-moradia"
+                             data-bs-toggle="modal"
+                             data-bs-target="#modalFoto{{ forloop.counter }}"
+                             alt="Foto da moradia">
+
+                        <div class="modal fade" id="modalFoto{{ forloop.counter }}" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Foto da Residência</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="{{ foto.foto.url }}" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p class="empty-msg">Nenhuma foto cadastrada.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Barra de Ações -->
+        <div class="action-bar">
+            <button class="btn-rejeitar">✕ Rejeitar Solicitação</button>
+            <button class="btn-aprovar">✓ Aprovar Solicitação</button>
+        </div>
+
+    </div>
+
+    <!-- Modal Documento -->
+    <div class="modal fade" id="modalDocumento" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Documento de Identificação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ cadastro.doc_identificacao.url }}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
