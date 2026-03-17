@@ -274,6 +274,101 @@ footer {
     color: var(--color-hovers);
 }
 
+
+/* CONTAINER DOS CARDS */
+
+#cardsDogs{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* CARD */
+
+.dogCard{
+    width: 23rem;
+    background-color: var(--color-cards-background);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 2px solid #f4b400;
+    transition: transform .3s ease;
+}
+
+.dogCard:hover{
+    transform: translateY(-5px);
+}
+
+/* IMAGEM */
+
+.dogImg{
+    position: relative;
+    width: 100%;
+    height: 220px;
+}
+
+.dogImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CORAÇÃO */
+
+.heart{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 8px 10px;
+    font-size: 18px;
+    color: #ff5a5a;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+/* INFO */
+
+.dogInfo{
+    padding: .9rem;
+}
+
+/* HEADER */
+
+.dogHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .75rem;
+}
+
+.dogHeader h3{
+    font-family: var(--font-title);
+    color: var(--color-title);
+    font-size: 1.6rem;
+}
+
+/* IDADE */
+
+.age{
+    background-color: #F97316;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* TEXTO */
+
+.dogInfo p{
+    color: var(--color-text);
+    line-height: .5;
+    font-size: 0.95rem;
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 768px){
@@ -295,6 +390,15 @@ footer {
 
     #heroLogo{
         max-width: 95%;
+    }
+
+    #cardsDogs{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dogCard{
+        width: 90%;
     }
 
 }
