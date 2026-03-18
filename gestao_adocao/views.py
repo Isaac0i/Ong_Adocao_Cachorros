@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Adotante, FotoMoradia
 from PIL import Image # biblioteca pillow
-import os
+from django.contrib import messages
 from django.conf import settings
 from datetime import date
 
@@ -52,7 +52,7 @@ def forms(request):
         )
         img_moradia.save()
 
-        return redirect('/adocao/formulario/?status=1')
+        return redirect('/forms/?status=1')
     
 
     
@@ -62,7 +62,32 @@ def lista_cadastros(request):
 
 def user(request, id):
     cadastro = Adotante.objects.all().prefetch_related('fotos').get(id=id)
+
+    if request.method == 'POST':
+        acao = request.POST.get('acao')
+
+        if acao == 'aprovado':
+            cadastro.status = 'aprovado'
+            cadastro.save()
+            messages.success(request, 'Solicitação Aprovada com Sucesso! ✓')
+        
+        elif acao == 'reprovado':
+            cadastro.status = 'reprovado'
+            cadastro.save()
+            messages.error(request, 'Solicitação Reprovada! ✕')
+
     return render(request, 'user.html', {'cadastro': cadastro,})
+
+    
+    
+    
+
+
+
+
+
+
+
 
     
     

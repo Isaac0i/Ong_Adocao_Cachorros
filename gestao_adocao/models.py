@@ -41,6 +41,9 @@ class Adotante(models.Model):
     criado_em = models.DateField(auto_now_add=True)
     atualizado_em = models.DateField(auto_now=True)
 
+    # Status do Usuario
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='em_analise')
+
     def __str__(self):
         return self.nome_completo
 
