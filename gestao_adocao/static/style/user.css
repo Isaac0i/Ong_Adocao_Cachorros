@@ -1,6 +1,8 @@
 /* ========================
    VARIÁVEIS & RESET
 ======================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
     --cream: #fdf6ee;
     --orange: #e8825a;
@@ -17,8 +19,8 @@
     --card-bg: #ffffff;
     --shadow: 0 2px 12px rgba(100, 60, 20, 0.08);
     --radius: 16px;
-    --font-display: 'Fraunces', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Inter', serif;
+    --font-body: 'Inter', sans-serif;
 }
 
 * {
@@ -28,21 +30,22 @@
 }
 
 body {
+    background-image: url("../imgs/backgroundImg.png");
+    background-repeat: repeat;
     font-family: var(--font-body);
     background-color: var(--cream);
     color: var(--text-dark);
     min-height: 100vh;
     padding-bottom: 100px;
-    background-image: url("../imgs/backgroundImg.png");
-    background-repeat: repeat;
 }
 
 /* ========================
    LAYOUT
 ======================== */
 .page-wrapper {
-    width: 100%;
-    padding: 24px 32px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px 16px;
 }
 
 .content {
@@ -60,7 +63,7 @@ body {
 
 .back-link {
     font-family: var(--font-body);
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--text-light);
     text-decoration: none;
@@ -82,13 +85,13 @@ body {
 
 .header-title h1 {
     font-family: var(--font-display);
-    font-size: 40px;
+    font-size: 28px;
     font-weight: 600;
     color: var(--text-dark);
 }
 
 .status-badge {
-    font-size: 20px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -135,7 +138,15 @@ body {
 }
 
 .card-icon {
-    font-size: 18px;
+    font-size: 27px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.card-icon-lower{
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 10px;
 }
 
 .card-header h2 {
@@ -165,11 +176,22 @@ body {
 }
 
 .field label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    color: var(--text-light);
+    color: var(--orange);
+}
+
+.field label svg {
+    width: 20px;
+    height: 20px;
+    color: var(--orange);
+    flex-shrink: 0;
+    margin-bottom: 4px;
 }
 
 .field p {
@@ -198,6 +220,8 @@ body {
 .tag--sim::before {
     content: '✓';
     font-weight: 700;
+    color: var(--green);
+    font-weight: 900;
 }
 
 .tag--nao {
@@ -206,6 +230,8 @@ body {
 
 .tag--nao::before {
     content: '✕';
+    color: var(--red);
+    font-weight: 900;
 }
 
 /* ========================
@@ -344,6 +370,45 @@ body {
 .btn-aprovar:hover {
     background: var(--green-dark);
     transform: translateY(-1px);
+}
+
+/* ========================
+   MENSSAGEM DE VALIDAÇÃO DO USUARIO
+======================== */
+.overlay-msg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeOut 2.5s ease forwards;
+}
+
+.overlay-success {
+    background: rgba(74, 158, 127, 0.4); /* verde transparente */
+}
+
+.overlay-error {
+    background: rgba(217, 95, 95, 0.4); /* vermelho transparente */
+}
+
+.overlay-content {
+    background: white;
+    padding: 24px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; pointer-events: none; }
 }
 
 /* ========================

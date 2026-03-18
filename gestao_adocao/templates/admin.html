@@ -46,7 +46,7 @@
                             <td>{{ dados.telefone }}</td>
                             <td>{{ dados.endereco }}</td>
                             <td>{{ dados.criado_em }}</td>
-                            <td>-</td>
+                            <td>{{ dados.get_status_display }}</td>
                             <td>
                                 <a href={% url 'user' dados.id %}>Ver Mais</a>
                             </td>      
