@@ -13,21 +13,69 @@ def forms(request):
     if request.method == 'GET':
         status = request.GET.get('status')
         return render(request, 'forms.html', {'status': status,})
-    
 
     elif request.method == 'POST':
-        nome_completo = request.POST.get('nome')
-        email= request.POST.get('email')
-        telefone = request.POST.get('telefone')
-        endereco = request.POST.get('endereco')
-        tipo_moradia = request.POST.get('tipo_moradia')
+        nome_completo = request.POST.get('nome').strip().title()
+        email= request.POST.get('email').strip().lower()
+        telefone = request.POST.get('telefone').strip()
+        endereco = request.POST.get('endereco').strip().title()
+        tipo_moradia = request.POST.get('tipo_moradia').strip()
         possui_outros_pets = request.POST.get('possui_outros_pets')
-        experiencia_caes = request.POST.get('experiencia_caes')
-        motivo_adocao = request.POST.get('motivo_adocao')
+        experiencia_pets = request.POST.get('experiencia_pets')
+        motivo_adocao = request.POST.get('motivo_adocao').strip()
         doc_identificacao = request.FILES.get("documento")
         criado_em = request.POST.get("criado_em")
         atualizado_em = request.POST.get("atualizado_em")
         foto_moradia = request.FILES.get("fotos_moradia")
+        renda_familiar = request.POST.get('renda_familiar')
+        cep = request.POST.get('cep').strip()
+        pessoas_na_familia = request.POST.get('pessoas_na_familia')
+
+        # Validar campos vazios
+        campos_obrigatorios = {
+            'nome': nome_completo,
+            'email': email,
+            'telefone': telefone,
+            'endereco': endereco,
+            'cep': cep,
+            'tipo_moradia': tipo_moradia,
+            'possui_outros_pets': possui_outros_pets,
+            'experiencia_pets': experiencia_pets,
+            'motivo_adocao': motivo_adocao,
+            'doc_identificacao': doc_identificacao,
+            'foto_moradia': foto_moradia,
+            'renda_familiar': renda_familiar,
+            'pessoas_na_familia': pessoas_na_familia,
+
+        }
+
+        campos_vazios = [campo for campo, valor in campos_obrigatorios.items() if not valor]
+
+        if campos_vazios:
+            return render(request, 'forms.html', {})
+        
+        # Validar formato do e-mail
+        if '@' not in email or '.' not in email:
+            return render(request, 'forms.html', {})
+        
+        # Bloquear email duplicado
+        if Adotante.objects.filter(email=email).exists():
+            return render(request, 'forms.html', {
+                'erro': 'Este e-mail já foi cadastrado!',
+                'campos_vazios': ['email'],
+            })
+        
+        # Validar tamanho do telefone
+        telefone_limpo = telefone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+        if len(telefone_limpo) < 11:
+            return render(request, 'forms.html', {})
+        
+        # Bloquear telefone duplicado
+        if Adotante.objects.filter(telefone=telefone).exists():
+            return render(request, 'forms.html', {
+                'erro': 'Este telefone já foi cadastrado!',
+                'campos_vazios': ['telefone'],
+            })
 
         dados = Adotante(   
             nome_completo = nome_completo,
@@ -36,11 +84,14 @@ def forms(request):
             endereco = endereco,
             tipo_moradia = tipo_moradia,
             possui_outros_pets = possui_outros_pets,
-            experiencia_caes = experiencia_caes,
+            experiencia_pets = experiencia_pets,
             motivo_adocao = motivo_adocao,
             doc_identificacao = doc_identificacao,
             criado_em = criado_em,
             atualizado_em = atualizado_em,
+            renda_familiar = renda_familiar,
+            cep = cep,
+            pessoas_na_familia = pessoas_na_familia
         )
 
         dados.save()

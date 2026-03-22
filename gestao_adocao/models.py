@@ -1,6 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Adotante(models.Model):
     TIPO_MORADIA_CHOICES = [
@@ -9,7 +8,7 @@ class Adotante(models.Model):
         ('chacara', 'Chácara'),
     ]
 
-    OPCOES = [
+    OPCOES_CHOICES = [
         ('sim', 'Sim'),
         ('nao', 'Não'),
     ]
@@ -21,17 +20,33 @@ class Adotante(models.Model):
         ('reprovado', 'Reprovado'),
     ]
 
+    RENDA_FAMILIAR_CHOICES = [
+        ('ate_2000', 'R$1.000 a R$2.000'),
+        ('ate_3000', 'R$2.000 a R$3.000'),
+        ('acima_3000', 'Acima de R$3.000'),
+    ]
+    PESSOAS_CHOICES = [
+        ('1', '1 pessoa'),
+        ('2', '2 pessoas'),
+        ('3', '3 pessoas'),
+        ('4', '4 pessoas'),
+        ('5', '5 pessoas'),
+        ('acima_5', 'Acima de 5 pessoas'),
+    ]
 
     # Dados pessoais
     nome_completo = models.CharField(max_length=255)
-    email = models.EmailField()
-    telefone = models.CharField(max_length=20)
+    email = models.EmailField(unique=True)
+    telefone = models.CharField(max_length=20, unique=True)
     endereco = models.TextField()
+    cep = models.CharField(max_length=9)
+    renda_familiar = models.CharField(max_length=20, choices=RENDA_FAMILIAR_CHOICES)
+    pessoas_na_familia = models.CharField(max_length=10, choices=PESSOAS_CHOICES)
 
     # Informações sobre moradia e pets
     tipo_moradia = models.CharField(max_length=20, choices=TIPO_MORADIA_CHOICES)
-    possui_outros_pets = models.CharField(max_length=3 ,choices=OPCOES)
-    experiencia_caes = models.CharField(max_length=3 ,choices=OPCOES)
+    possui_outros_pets = models.CharField(max_length=3 ,choices=OPCOES_CHOICES)
+    experiencia_pets = models.CharField(max_length=3 ,choices=OPCOES_CHOICES)
     motivo_adocao = models.TextField()
 
     # Documento de Identificação do Usuário

@@ -14,54 +14,113 @@
         <label>Nome Completo</label>
         <input type="text" placeholder="Nome Completo" class="form-control" name="nome">
         <br>
+        <br>
         <label>E-mail</label>
         <input type="text" placeholder="E-mail" class="form-control" name="email">
+        <br>
         <br>
         <label>Telefone</label>
         <input type="text" placeholder="(11) 90000-0000" class="form-control" name="telefone">
         <br>
+          <div class="invalid-feedback">Por favor preencha o Telefone.</div>
+        <br>
         <label>Endereço</label>
         <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
         <br>
-
+        <br>
+        <label>CEP</label>
+        <input type="text" class="form-control" name="cep" placeholder="00000-000" maxlength="9">
+        <br>
+        <br>
+        <label>Quantidade de Pessoas na Família</label>
+        <select class="form-select" name="pessoas_na_familia">
+            <option value="" selected="">Selecione:</option>
+            <option value="1">1 pessoa</option>
+            <option value="2">2 pessoas</option>
+            <option value="3">3 pessoas</option>
+            <option value="4">4 pessoas</option>
+            <option value="5">5 pessoas</option>
+            <option value="acima_5">Acima de 5 pessoas</option>
+        </select>
+        <br>
+        <br>
+        <label>Renda Familiar</label>
+        <select class="form-select" name="renda_familiar">
+          <option value="" selected>Selecione:</option>
+          <option value="ate_2000">R$1.000 á R$2.000</option>
+          <option value="ate_3000">R$2.000 á R$3.000</option>
+          <option value="acima_3000">Acima de R$3.000</option>
+        </select>
+        <br>
+        <br>
         <label>Tipo de Moradia</label>
         <select class="form-select" name="tipo_moradia">
-          <option selected>Selecione:</option>
+          <option value="" selected>Selecione:</option>
           <option value="casa">Casa</option>
           <option value="apartamento">Apartamento</option>
           <option value="chacara">Chácara</option>
-        </select> 
+        </select>
         <br>
-
-        <label>Possui outros pets?</label>
+        <br>
+        <label>Possui outros Pets?</label>
         <select class="form-select" name="possui_outros_pets">
-          <option selected>Selecione:</option>
+          <option value="" selected>Selecione:</option>
           <option value="sim">Sim</option>
           <option value="nao">Não</option>
-        </select> 
-
+        </select>
         <br>
-
-        <label>Já teve experiência com cães antes?</label>
-        <select class="form-select" name="experiencia_caes">
-          <option selected>Selecione:</option>
+        <br>
+        <label>Já teve experiência com Pets antes?</label>
+        <select class="form-select" name="experiencia_pets">
+          <option value="" selected>Selecione:</option>
           <option value="sim">Sim</option>
           <option value="nao">Não</option>
-        </select> 
+        </select>
         <br>
-
-        <label>Por que você deseja adotar um pet?</label>
+        <br>
+        <label>Por que você deseja adotar um Pet?</label>
         <input type="text" class="form-control" name="motivo_adocao">
         <br>
-        <label>Documento de Identificação</label>
+        <br>
+        <label>Documento de Identificação:</label>
         <input type="file" name="documento">
         <br>
-        <label>Fotos da sua Moradia</label>
+        <br>
+        <label>Fotos da sua Moradia:</label>
         <input type="file" name="fotos_moradia">
         <br>
+        <br>
+        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="concordo" id="concordo" required>
+          <label class="form-check-label" for="concordo">
+            Li e estou ciente do <a href="#">Aviso de Privacidade</a> da Toca dos Peludos e autorizo o uso das informações pessoais fornecidas exclusivamente para fins de análise e processamento da minha solicitação de adoção, em conformidade com a Lei Geral de Proteção de Dados (LGPD).
+          </label>
+        </div>
+        <br>
+        <br>
+        <br>
         <input type="submit" class="btn btn-success" value="Enviar">
-
     </form>
+
+    <!-- 
+    AVISO DE PRIVACIDADE — TOCA DOS PELUDOS
+    1. Quem somos
+    A Toca dos Peludos é uma ONG dedicada ao resgate e adoção responsável de cães. Levamos a privacidade dos nossos adotantes a sério e nos comprometemos a proteger seus dados pessoais.
+    2. Quais dados coletamos
+    Coletamos as seguintes informações durante o processo de adoção: nome completo, e-mail, telefone, endereço, documento de identificação e fotos da moradia.
+    3. Para que usamos seus dados
+    Suas informações são utilizadas exclusivamente para análise e processamento da sua solicitação de adoção, verificação de idoneidade do adotante e contato durante o processo de adoção.
+    4. Com quem compartilhamos
+    Seus dados não são vendidos, alugados ou compartilhados com terceiros. As informações são acessadas apenas pela equipe responsável pela análise de adoções.
+    5. Por quanto tempo guardamos
+    Seus dados são mantidos pelo período necessário para conclusão do processo de adoção, podendo ser armazenados por até 5 anos para fins de registro.
+    6. Seus direitos (LGPD)
+    Você tem direito a acessar, corrigir ou solicitar a exclusão dos seus dados a qualquer momento, entrando em contato conosco.
+    7. Contato
+    Dúvidas sobre privacidade? Entre em contato: contato@tocadospecludos.org.br
+    -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
   </body>
 </html>
