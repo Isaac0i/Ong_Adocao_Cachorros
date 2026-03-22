@@ -68,23 +68,42 @@ body{
 }
 
 /*  HERO */
-
 .hero {
     position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 
-    background-image: url("../imgs/heroImg2.png");
+    background-image: url("../imgs/heroT1.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    mask-image: linear-gradient(
-        to bottom,
-        rgba(0,0,0,1) 75%,
-        rgba(0,0,0,0) 100%
-    );
+    overflow: hidden; /* importante pro blur não vazar */
+}
+
+/* camada de overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(163, 70, 19, 0.6); /* cor laranja transparente */
+    backdrop-filter: blur(6px); /* blur real */
+    
+    z-index: 1;
+}
+
+/* conteúdo fica acima do overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
 }
 
 .hero-content {
@@ -96,7 +115,7 @@ body{
 }
 
 #heroLogo {
-    height: auto;
+    height: 32rem;
     max-width: 80%;
 }
 

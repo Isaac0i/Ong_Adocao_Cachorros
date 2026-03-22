@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="{% static "style/style.css" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
         
     <header class="hero">
         <div class="hero-content">
-            <img src="{% static 'imgs/heroLogo.png'%}" alt="Toca dos Peludos" id="heroLogo">
+            <img src="{% static 'imgs/logoTocaPeludosSF.png'%}" alt="Toca dos Peludos" id="heroLogo">
         </div>
     </header>
 
@@ -62,7 +62,7 @@
         </section>
 
         <section id="dogs">
-            <h2>Bichinhos Disponiveis para Adoção</h2>
+            <h2>Cães Disponíveis para Adoção</h2>
 
             <p>Conheça nossos peludos que estão esperando por um lar cheio de amor!</p>
 
@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <button id="formButton" onclick="window.location.href={% url 'forms' %}">Quero Adotar! 🐾</button>
+            <button id="formButton" href="{% url 'forms' %}">Quero Adotar! 🐾</button>
         </section>
     </main>
     
