@@ -17,7 +17,7 @@
             <ul class="nav-list">
                 <li><a href="#aboutUs">Sobre Nós</a></li>
                 <li><a href="#dogs">Nossos Bichinhos</a></li>
-                <li><a href="forms.html">Adote Um!</a></li>
+                <li><a href="forms">Adote Um!</a></li>
             </ul>
         </nav>
         
@@ -62,7 +62,7 @@
         </section>
 
         <section id="dogs">
-            <h2>Cães Disponíveis para Adoção</h2>
+            <h2>Bichinhos Disponíveis para Adoção</h2>
 
             <p>Conheça nossos peludos que estão esperando por um lar cheio de amor!</p>
 
@@ -131,9 +131,65 @@
                         <p>Golden retriever extremamente amigável, adora brincar e se dá muito bem com crianças e outros pets.</p>
                     </div>
                 </div>
+
+                <div class="dogCard">
+                    <div class="dogImg">
+                        <img src="{% static '\imgs\gato1.png'%}" alt="Luna">
+                    </div>
+                    <div class="dogInfo">
+                        <div class="dogHeader">
+                            <h3>Luna</h3>
+                            <span class="age">3 anos</span>
+                        </div>
+                        <p>Gato dorminhoco e tranquilo, não dá trabalho. Se adapta bem a novos ambientes e outros pets.</p>
+                    </div>
+                </div>
             </div>
 
-            <a href="forms.html" id="formButton">Quero Adotar! 🐾</a>
+            <a href="forms" id="formButton">Quero Adotar! 🐾</a>
+        </section>
+
+        <section class="events">
+            <h2>Próximos Eventos</h2>
+            <p>Participe das nossas feiras de adoção, bazares, caminhadas solidárias e muito mais!</p>
+
+            <div class="eventsContainer">
+
+                <div class="eventCard">
+                    <img src="{% static 'imgs/adocao.png'%}" alt="Animais para adoção" class="eventImg">
+
+                    <div class="eventContent">
+                        <h3>Feira de Adoção no Parque</h3>
+
+                        <div class="eventInfo">
+                            <p>📅 15 de Abril, 2026</p>
+                            <p>🕒 10:00 - 16:00</p>
+                            <p>🗺️ Parque Municipal - Zona Norte</p>
+                        </div>
+
+                        <p>Venha conhecer nossos peludos pessoalmente! Teremos mais de 30 cães disponíveis para adoção...</p>
+                    </div>
+                </div>
+
+                <div class="eventCard">
+                    <img src="{% static 'imgs/feira.png'%}" alt="Feira de Adoção" class="eventImg">
+
+                    <div class="eventContent">
+                        <h3>Caminhada Solidária Pet</h3>
+
+                        <div class="eventInfo">
+                            <p>📅 5 de Maio, 2026</p>
+                            <p>🕒 08:00 - 11:00</p>
+                            <p>🗺️ Orla da Praia - Início no Posto 5</p>
+                        </div>
+
+                        <p>Participe da nossa caminhada solidária com seu pet! A renda será revertida...</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="" id="formButton">Ver Todos os Eventos 📅</a>
         </section>
     </main>
     

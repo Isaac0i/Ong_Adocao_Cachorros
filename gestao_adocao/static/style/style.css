@@ -373,6 +373,71 @@ footer {
     font-size: 0.95rem;
 }
 
+.events {
+    padding: 4rem 2rem;
+    background-color: #fdf6ee;
+    text-align: center;
+}
+
+.events a, p {
+   margin-top: 2rem;
+}
+
+.eventsContainer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* CARD */
+.eventCard {
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 420px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: 0.3s ease;
+}
+
+.eventCard:hover {
+    transform: translateY(-5px);
+}
+
+/* IMAGEM */
+.eventImg {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* CONTEÚDO */
+.eventContent {
+    padding: 1.5rem;
+}
+
+.eventContent h3 {
+    font-size: 1.6rem;
+    color: #7a3e1d;
+    margin-bottom: 1rem;
+}
+
+/* INFO (data, hora, local) */
+.eventInfo p {
+    margin: 0.3rem 0;
+    color: #d35400;
+    font-weight: 500;
+}
+
+/* DESCRIÇÃO */
+.eventContent p:last-child {
+    margin-top: 1rem;
+    color: #5a5a5a;
+    line-height: 1.5;
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 768px){
