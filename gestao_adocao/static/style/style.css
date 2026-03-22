@@ -70,7 +70,7 @@ body{
 /*  HERO */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
 
@@ -106,13 +106,6 @@ body{
     padding-top: 10vh;
 }
 
-.hero-content {
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 10vh;
-}
 
 #heroLogo {
     height: 32rem;
@@ -158,9 +151,9 @@ section {
     font-size: 1.1rem;
 }
 
-/* BOTÃO */
-
 #formButton {
+    display: inline-block;
+    text-decoration: none;
     padding: .9rem 2rem;
     border-radius: 2rem;
     font-size: 1.4rem;
@@ -169,6 +162,13 @@ section {
     color: var(--color-wtext);
     border: none;
     background: linear-gradient(to right,#D97706,#F97316);
+    
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#formButton:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* CARDS */

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static "style/style.css" %}">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
             <ul class="nav-list">
                 <li><a href="#aboutUs">Sobre Nós</a></li>
                 <li><a href="#dogs">Nossos Bichinhos</a></li>
-                <li><a href="#">Adote Um!</a></li>
+                <li><a href="forms.html">Adote Um!</a></li>
             </ul>
         </nav>
         
@@ -32,15 +32,15 @@
         <section id="aboutUs">
             <h2>Sobre Nós</h2>
 
-            <p class="aboutUs-p">A <strong>Toca dos Peludos</strong>  é uma ONG dedicada ao resgate, cuidado e adoção responsável de cães em situação de vulnerabilidade. Desde 2015, já resgatamos mais de 500 animais e encontramos lares amorosos para cada um deles. Nossa missão é garantir que todo peludo tenha uma segunda chance de ser feliz ao lado de uma família que o ame incondicionalmente.</p>
+            <p class="aboutUs-p">A <strong>Toca dos Peludos</strong>  é uma ONG dedicada ao resgate, cuidado e adoção responsável de animais em situação de vulnerabilidade. Desde 2015, já resgatamos mais de 12.000 animais e encontramos lares amorosos para cada um deles. Nossa missão é garantir que todo peludo tenha uma segunda chance de ser feliz ao lado de uma família que o ame incondicionalmente.</p>
 
             <div>
                 <ul class="cards_infos">
                     <li>
                         <article class="cardsI">
                             <img src="{% static '\imgs\coracao.png'%}" alt="Coração" class="cardsI_img">
-                            <h3>500+ Adoções</h3>
-                            <p>Cães resgatados e adotados com amor</p>
+                            <h3>12.000+ Adoções</h3>
+                            <p>Historias de Bichinhos que foram Salvos</p>
                         </article>
                     </li>
                     <li>
@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <button id="formButton" href="{% url 'forms' %}">Quero Adotar! 🐾</button>
+            <a href="forms.html" id="formButton">Quero Adotar! 🐾</a>
         </section>
     </main>
     
