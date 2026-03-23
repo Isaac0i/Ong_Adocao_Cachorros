@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/events.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+    <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#aboutUs">Sobre Nós</a></li>
+                <li><a href="#dogs">Nossos Bichinhos</a></li>
+                <li><a href="forms">Adote Um!</a></li>
+                <li><a href="events">Próximos Eventos</a></li>
+            </ul>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content">
+                <span class="heart">❤</span>
+
+                <h1>Toca dos Peludos</h1>
+
+                <p>Conectando corações peludos a lares amorosos. Participe dos nossos eventos de adoção e encontre seu novo melhor amigo!</p>
+            </div>
+        </header>  
+
+        <main>
+            <section class="events">
+                <h2>Próximos Eventos</h2>
+
+                <div class="cardsEvents">
+                    <div class="card">
+                        <img src="{% static 'imgs/cao.png' %}" alt="Evento 1">
+
+                        <div class="card-content">
+                            <h3>Feira de Adoção - Shopping Center</h3>
+
+                            <p>Grande feira de adoção com dezenas de cães e gatos à procura de um lar. Traga documentos e muito amor!</p>
+                            <div class="info">
+                                <span>📅 25 de Março, 2026</span>
+                                <span>⏰ 10:00 - 17:00</span>
+                                <span>📍 Shopping Grande Plaza</span>
+                            </div>
+
+                            <button>Cadastre-se</button>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <img src="{% static 'imgs/gato1.png' %}" alt="Evento 2">
+
+                        <div class="card-content">
+                            <h3>Adote um Gatinho</h3>
+
+                            <p>Evento especial dedicado à adoção de gatos e gatinhos. Venha conhecer nossos felinos carinhosos!</p>
+                            <div class="info">
+                                <span>📅 1 de Abril, 2026</span>
+                                <span>⏰ 09:00 - 16:00</span>
+                                <span>📍 Parque Municipal</span>
+                            </div>
+
+                            <button>Cadastre-se</button>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <img src="{% static 'imgs/feira.png' %}" alt="Evento 3">
+
+                        <div class="card-content">
+                            <h3>Filhotes à Procura de um Lar</h3>
+                        
+                            <p>Filhotes de diversas raças esperando por você. Evento com veterinários e orientações.</p>
+                            <div class="info">
+                                <span>📅 8 de Abril, 2026</span>
+                                <span>⏰ 11:00 - 18:00</span>
+                                <span>📍 Centro Comunitário</span>
+                            </div>
+
+                            <button>Cadastre-se</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+        </main>
+    
+</body>
+</html>

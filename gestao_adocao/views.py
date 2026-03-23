@@ -129,8 +129,8 @@ def user(request, id):
 
     return render(request, 'user.html', {'cadastro': cadastro,})
 
-    
-    
+def events(request):
+    return render(request, 'events.html')
     
 
 
