@@ -17,12 +17,18 @@ document.querySelector('[name="cep"]').addEventListener('input', function(e) {
     if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5, 8);
     e.target.value = v;
 });
-
+/* Limitar upload de fotos a 3 */
+document.querySelector('[name="novas_fotos"]')?.addEventListener('change', function(e) {
+    if (e.target.files.length > 3) {
+        alert('Você pode selecionar no máximo 3 fotos!');
+        e.target.value = ''; // limpa a seleção
+    }
+});
 
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // ✅ Limpa erros PRIMEIRO
+    //  Limpa erros PRIMEIRO
     document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
     document.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
 

@@ -438,6 +438,71 @@ footer {
     line-height: 1.5;
 }
 
+/* FILTRO DE PESQUINA PAGINA ADMIN */
+.filtro {
+    width: 98%;
+    max-width: 1500px;
+    background-color: var(--color-cards-background);
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.filtros-bar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.filtro-pesquisa {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+.filtro-pesquisa:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.filtro-select {
+    width: auto;
+    min-width: 160px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.btn-limpar {
+    white-space: nowrap;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #fdecea;
+    color: var(--red-dark);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #f2b8b8;
+    transition: background 0.2s;
+}
+
+.btn-limpar:hover {
+    background: var(--red);
+    color: white;
+}
+
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 768px){

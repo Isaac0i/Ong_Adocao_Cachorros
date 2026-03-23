@@ -10,19 +10,39 @@
 
   <body>
     <h1>Fomulario</h1>
+
+    <!--Mensagem que o Formulario foi enviado com Sucesso-->
+    {% if status == '1' %}
+      <div class="alert alert-success">
+        ✅ Formulário enviado com sucesso! Entraremos em contato em breve.
+      </div>
+    {% endif %}
+    
+    <!--Mensagem de E-mail ou Numero de Telefone Duplicado-->
+    {% if erro %}
+      <div class="alert alert-danger">
+          ⚠️ {{ erro }}
+      </div>
+    {% endif %}
+
     <form action="{% url 'forms' %}" method='POST' enctype="multipart/form-data"> {% csrf_token %}
         <label>Nome Completo</label>
         <input type="text" placeholder="Nome Completo" class="form-control" name="nome">
         <br>
         <br>
         <label>E-mail</label>
-        <input type="text" placeholder="E-mail" class="form-control" name="email">
+        <input type="email" placeholder="E-mail" class="form-control {% if 'email' in campos_vazios %}is-invalid{% endif %}" name="email">
+        {% if 'email' in campos_vazios %}
+          <div class="invalid-feedback">{{ erro }}</div>
+        {% endif %}
         <br>
         <br>
         <label>Telefone</label>
-        <input type="text" placeholder="(11) 90000-0000" class="form-control" name="telefone">
+        <input type="text" placeholder="(11) 90000-0000" class="form-control {% if 'telefone' in campos_vazios %}is-invalid{% endif %}" name="telefone">
+        {% if 'telefone' in campos_vazios %}
+            <div class="invalid-feedback">{{ erro }}</div>
+        {% endif %}
         <br>
-          <div class="invalid-feedback">Por favor preencha o Telefone.</div>
         <br>
         <label>Endereço</label>
         <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
@@ -83,11 +103,11 @@
         <br>
         <br>
         <label>Documento de Identificação:</label>
-        <input type="file" name="documento">
+        <input type="file" name="documento" multiple accept="image/*">
         <br>
         <br>
         <label>Fotos da sua Moradia:</label>
-        <input type="file" name="fotos_moradia">
+        <input type="file" name="fotos_moradia" multiple accept="image/*">
         <br>
         <br>
         <br>

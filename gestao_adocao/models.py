@@ -49,9 +49,6 @@ class Adotante(models.Model):
     experiencia_pets = models.CharField(max_length=3 ,choices=OPCOES_CHOICES)
     motivo_adocao = models.TextField()
 
-    # Documento de Identificação do Usuário
-    doc_identificacao = models.ImageField(upload_to="documento/")
-
     # Controle de datas
     criado_em = models.DateField(auto_now_add=True)
     atualizado_em = models.DateField(auto_now=True)
@@ -68,3 +65,10 @@ class FotoMoradia(models.Model):
 
     def __str__(self):
         return f'Foto de {self.adotante.nome_completo}'
+
+class DocumentoIdentificacao(models.Model):
+    adotante = models.ForeignKey(Adotante, on_delete=models.CASCADE, related_name='documentos')
+    doc_identificacao = models.ImageField(upload_to="documento/")
+
+    def __str__(self):
+        return f'Documento de {self.adotante.nome_completo}'
