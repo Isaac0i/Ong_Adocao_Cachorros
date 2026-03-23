@@ -393,6 +393,7 @@ footer {
 
 /* CARD */
 .eventCard {
+    border-top: #D97706 4px solid;
     background-color: #fff;
     border-radius: 20px;
     overflow: hidden;
@@ -432,11 +433,6 @@ footer {
 }
 
 /* DESCRIÇÃO */
-.eventContent p:last-child {
-    margin-top: 1rem;
-    color: #5a5a5a;
-    line-height: 1.5;
-}
 
 /* FILTRO DE PESQUINA PAGINA ADMIN */
 .filtro {
