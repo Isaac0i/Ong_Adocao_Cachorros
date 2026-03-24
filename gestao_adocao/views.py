@@ -172,7 +172,6 @@ def user(request, id):
             cadastro.experiencia_pets = request.POST.get('experiencia_pets')
             cadastro.motivo_adocao = request.POST.get('motivo_adocao').strip()
 
-<<<<<<< HEAD
             # Adicionar novos documentos
             novos_docs = request.FILES.getlist('novos_documentos')
             docs_atuais = cadastro.documentos.count()
@@ -182,11 +181,6 @@ def user(request, id):
             else:
                 for doc in novos_docs:
                     DocumentoIdentificacao.objects.create(adotante=cadastro, doc_identificacao=doc)
-=======
-def events(request):
-    return render(request, 'events.html')
-    
->>>>>>> a9fb5c9dc221b31a433d6edbd3007bace9f4eda4
 
             # Deletar documentos selecionados
             docs_deletar = request.POST.getlist('deletar_doc')
