@@ -70,28 +70,20 @@ body{
 /*  HERO */
 .hero {
     position: relative;
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 
-    background-image: url("../imgs/heroT1.png");
+    background-image: url("../imgs/heroImg2.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    overflow: hidden; /* importante pro blur não vazar */
-}
-
-/* camada de overlay */
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: rgba(163, 70, 19, 0.6); /* cor laranja transparente */
-    backdrop-filter: blur(6px); /* blur real */
-    
-    z-index: 1;
+    mask-image: linear-gradient(
+        to bottom,
+        rgba(0,0,0,1) 75%,
+        rgba(0,0,0,0) 100%
+    );
 }
 
 /* conteúdo fica acima do overlay */
@@ -103,12 +95,12 @@ body{
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-top: 10vh;
+    padding-top: 5vh;
 }
 
 
 #heroLogo {
-    height: 32rem;
+    height: 20rem;
     max-width: 80%;
 }
 
@@ -296,25 +288,7 @@ footer {
 
 /* CONTAINER DOS CARDS */
 
-#cardsDogs{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 2rem;
-}
 
-/* CARD */
-
-.dogCard{
-    width: 23rem;
-    background-color: var(--color-cards-background);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    border: 2px solid #f4b400;
-    transition: transform .3s ease;
-}
 
 .dogCard:hover{
     transform: translateY(-5px);
@@ -521,16 +495,7 @@ footer {
     #heroLogo{
         max-width: 95%;
     }
-
-    #cardsDogs{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .dogCard{
-        width: 90%;
-    }
-
+    
 }
 
 @media (max-width: 480px){
@@ -557,4 +522,98 @@ footer {
     width: 150px;
     cursor: pointer;
     margin: 5px;
+}
+
+.carousel-wrapper {
+    position: relative; 
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-container {
+    overflow: hidden; 
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* Estilo das Setas igual à foto */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: #7A3E1D;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev { left: -20px; }
+.next { right: -20px; }
+
+.prev:hover, .next:hover {
+    background-color: var(--color-hovers);
+    color: white;
+}
+
+/* Container que segura os cards em linha */
+#cardsDogs {
+    display: flex;
+    flex-wrap: nowrap;      
+    gap: 20px;              
+    transition: transform 0.5s ease-in-out;
+    width: max-content;     
+    padding: 20px 0;
+    will-change: transform;
+}
+
+/* O Card Individual */
+.dogCard {
+    flex: 0 0 auto;         
+    width: 320px;         
+    background-color: var(--color-cards-background);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border: none;        
+    text-align: left;    
+}
+
+/* Ajuste das setas para ficarem sobrepostas */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev { left: -20px; }
+.next { right: -20px; }
+
+/* Ajuste do container para esconder o que sobra */
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+    padding: 10px;
 }

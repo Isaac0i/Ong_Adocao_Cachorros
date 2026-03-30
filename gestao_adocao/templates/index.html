@@ -66,86 +66,94 @@
 
             <p>Conheça nossos peludos que estão esperando por um lar cheio de amor!</p>
 
-            <div id="cardsDogs">
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\cao.png'%}" alt="Max">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Max</h3>
-                            <span class="age">3 anos</span>
+            <div class="carousel-wrapper">
+                <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+
+
+                <div class="carousel-container">           
+                    <div id="cardsDogs" class="carousel-track">
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\cao.png'%}" alt="Max">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Max</h3>
+                                    <span class="age">3 anos</span>
+                                </div>
+                                <p>Um golden retriever muito carinhoso e brincalhão. Adora crianças e outros pets!</p>
+                            </div>
                         </div>
-                        <p>Um golden retriever muito carinhoso e brincalhão. Adora crianças e outros pets!</p>
+
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\gato1.png'%}" alt="Luna">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Luna</h3>
+                                    <span class="age">2 anos</span>
+                                </div>
+                                <p>Gato ativo e curioso, adora explorar e brincar. Se adapta bem a novos ambientes e outros pets.</p>
+                            </div>
+                        </div>
+
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\cao.png'%}" alt="Toby">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Toby</h3>
+                                    <span class="age">1 ano</span>
+                                </div>
+                                <p>Beagle cheio de energia! Precisa de uma família ativa que ame passeios ao ar livre.</p>
+                            </div>
+                        </div>
+
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\gato2.png'%}" alt="Luna">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Tigela</h3>
+                                    <span class="age">2 anos</span>
+                                </div>
+                                <p>Gato tranquilo e carinhoso, adora observar o ambiente e relaxar ao ar livre. Se dá muito bem com pessoas.</p>
+                            </div>
+                        </div>
+
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\cao.png'%}" alt="Max">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Max</h3>
+                                    <span class="age">4 anos</span>
+                                </div>
+                                <p>Golden retriever extremamente amigável, adora brincar e se dá muito bem com crianças e outros pets.</p>
+                            </div>
+                        </div>
+
+                        <div class="dogCard">
+                            <div class="dogImg">
+                                <img src="{% static '\imgs\gato1.png'%}" alt="Luna">
+                            </div>
+                            <div class="dogInfo">
+                                <div class="dogHeader">
+                                    <h3>Luna</h3>
+                                    <span class="age">3 anos</span>
+                                </div>
+                                <p>Gato dorminhoco e tranquilo, não dá trabalho. Se adapta bem a novos ambientes e outros pets.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\gato1.png'%}" alt="Luna">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Luna</h3>
-                            <span class="age">2 anos</span>
-                        </div>
-                        <p>Gato ativo e curioso, adora explorar e brincar. Se adapta bem a novos ambientes e outros pets.</p>
-                    </div>
-                </div>
-
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\cao.png'%}" alt="Toby">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Toby</h3>
-                            <span class="age">1 ano</span>
-                        </div>
-                        <p>Beagle cheio de energia! Precisa de uma família ativa que ame passeios ao ar livre.</p>
-                    </div>
-                </div>
-
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\gato2.png'%}" alt="Luna">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Tigela</h3>
-                            <span class="age">2 anos</span>
-                        </div>
-                        <p>Gato tranquilo e carinhoso, adora observar o ambiente e relaxar ao ar livre. Se dá muito bem com pessoas.</p>
-                    </div>
-                </div>
-
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\cao.png'%}" alt="Max">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Max</h3>
-                            <span class="age">4 anos</span>
-                        </div>
-                        <p>Golden retriever extremamente amigável, adora brincar e se dá muito bem com crianças e outros pets.</p>
-                    </div>
-                </div>
-
-                <div class="dogCard">
-                    <div class="dogImg">
-                        <img src="{% static '\imgs\gato1.png'%}" alt="Luna">
-                    </div>
-                    <div class="dogInfo">
-                        <div class="dogHeader">
-                            <h3>Luna</h3>
-                            <span class="age">3 anos</span>
-                        </div>
-                        <p>Gato dorminhoco e tranquilo, não dá trabalho. Se adapta bem a novos ambientes e outros pets.</p>
-                    </div>
-                </div>
+                <button class="next" onclick="moveSlide(1)">&#10095;</button>
             </div>
-
             <a href="forms" id="formButton">Quero Adotar! 🐾</a>
         </section>
 
@@ -167,7 +175,7 @@
                             <p>🗺️ Parque Municipal - Zona Norte</p>
                         </div>
 
-                        <p>Venha conhecer nossos peludos pessoalmente! Teremos mais de 30 cães disponíveis para adoção...</p>
+                        <p>Venha conhecer nossos peludos pessoalmente! Teremos mais de 30 cães disponíveis para adoção!</p>
                     </div>
                 </div>
 
@@ -183,7 +191,7 @@
                             <p>🗺️ Orla da Praia - Início no Posto 5</p>
                         </div>
 
-                        <p>Venha fazer parte desse multirão de adoção! Aqui na Praia de...</p>
+                        <p>Venha fazer parte desse multirão de adoção! Aqui na Praia Grande!</p>
                     </div>
                 </div>
 
@@ -198,4 +206,5 @@
         <p>Feito por: Julio Cesar, Guilherme Rodrigues e Isaac Inacio</p>
     </footer>
 </body>
+<script src="{% static 'js/index.js' %}"></script>
 </html>
