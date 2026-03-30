@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Adotante, FotoMoradia, DocumentoIdentificacao
 from django.contrib import messages
 import os
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     if request.method == 'GET':
@@ -109,10 +111,10 @@ def forms(request):
 
         return redirect('/forms/?status=1')
 
-
+@login_required(login_url='/login/')
 def lista_cadastros(request):
     cadastros = Adotante.objects.all().prefetch_related('fotos')
-    
+
     # Filtro de status
     status = request.GET.get('status')
     if status:
@@ -120,6 +122,7 @@ def lista_cadastros(request):
 
     # Ordenação
     ordem = request.GET.get('ordem', 'id_asc')  # padrão: ID menor para maior
+
     if ordem == 'id_asc':
         cadastros = cadastros.order_by('id')
     elif ordem == 'id_desc':
@@ -141,7 +144,7 @@ def lista_cadastros(request):
         'pesquisa': pesquisa,
     })
 
-
+@login_required(login_url='/login/')
 def user(request, id):
     cadastro = Adotante.objects.prefetch_related('fotos', 'documentos').get(id=id)
 
@@ -172,7 +175,6 @@ def user(request, id):
             cadastro.experiencia_pets = request.POST.get('experiencia_pets')
             cadastro.motivo_adocao = request.POST.get('motivo_adocao').strip()
 
-<<<<<<< HEAD
             # Adicionar novos documentos
             novos_docs = request.FILES.getlist('novos_documentos')
             docs_atuais = cadastro.documentos.count()
@@ -182,11 +184,6 @@ def user(request, id):
             else:
                 for doc in novos_docs:
                     DocumentoIdentificacao.objects.create(adotante=cadastro, doc_identificacao=doc)
-=======
-def events(request):
-    return render(request, 'events.html')
-    
->>>>>>> a9fb5c9dc221b31a433d6edbd3007bace9f4eda4
 
             # Deletar documentos selecionados
             docs_deletar = request.POST.getlist('deletar_doc')
@@ -229,3 +226,19 @@ def events(request):
             return redirect('admin')
 
     return render(request, 'user.html', {'cadastro': cadastro})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('admin')
+        else:
+            return render(request, 'login.html', {'erro': 'Usuário o senha incorretos!'})
+    return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
