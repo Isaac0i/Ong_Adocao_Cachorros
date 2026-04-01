@@ -242,3 +242,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def novo_front(request):
+    if request.method == 'GET':
+        return render(request, 'novo.html')
