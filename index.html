@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toca dos Peludos — ONG de Adoção e Doação Animal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ======================== NAV ======================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-icon">🐾</span>
+      <span class="nav__logo-text">Toca dos Peludos</span>
+    </div>
+    <ul class="nav__links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#adocao">Adoção</a></li>
+      <li><a href="#depoimentos">Histórias</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a href="#doe" class="btn btn--nav">Doe Agora 💛</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#adocao">Adoção</a></li>
+      <li><a href="#depoimentos">Histórias</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="#doe" class="btn btn--nav">Doe Agora 💛</a></li>
+    </ul>
+  </div>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg-blobs">
+      <div class="blob blob--1"></div>
+      <div class="blob blob--2"></div>
+      <div class="blob blob--3"></div>
+    </div>
+    <div class="hero__floating">
+      <span class="float-item" style="top:12%;left:6%">🐱</span>
+      <span class="float-item" style="top:72%;left:3%;animation-delay:1.2s">🦴</span>
+      <span class="float-item" style="top:20%;right:4%;animation-delay:0.7s">🐶</span>
+      <span class="float-item" style="top:80%;right:8%;animation-delay:2s">🐾</span>
+      <span class="float-item" style="top:45%;left:1%;animation-delay:1.8s;font-size:1.2rem">🌿</span>
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge reveal">🏠 Cada pet merece um lar</div>
+      <h1 class="hero__title reveal" style="animation-delay:.15s">
+        Um novo começo<br/>começa com <em>você</em>
+      </h1>
+      <p class="hero__sub reveal" style="animation-delay:.3s">
+        A Toca dos Peludos é uma ONG dedicada a resgatar, cuidar e encontrar lares amorosos para animais abandonados. Sua doação transforma vidas.
+      </p>
+      <div class="hero__actions reveal" style="animation-delay:.45s">
+        <a href="#doe" class="btn btn--primary">Quero Doar ❤️</a>
+        <a href="#adocao" class="btn btn--outline">Ver Pets para Adoção</a>
+      </div>
+    </div>
+    <div class="hero__visual reveal" style="animation-delay:.5s">
+      <div class="hero__card-stack">
+        <div class="pet-card pet-card--back">
+          <span class="pet-card__emoji">🐱</span>
+          <span class="pet-card__name">Mel</span>
+        </div>
+        <div class="pet-card pet-card--mid">
+          <span class="pet-card__emoji">🐶</span>
+          <span class="pet-card__name">Bob</span>
+        </div>
+        <div class="pet-card pet-card--front">
+          <span class="pet-card__emoji">🐕</span>
+          <span class="pet-card__name">Luna</span>
+          <span class="pet-card__status">Disponível 💚</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__stats reveal" style="animation-delay:.6s">
+      <div class="stat">
+        <span class="stat__num" data-count="1240">0</span>
+        <span class="stat__label">Animais resgatados</span>
+      </div>
+      <div class="stat__sep"></div>
+      <div class="stat">
+        <span class="stat__num" data-count="890">0</span>
+        <span class="stat__label">Adoções realizadas</span>
+      </div>
+      <div class="stat__sep"></div>
+      <div class="stat">
+        <span class="stat__num" data-count="320">0</span>
+        <span class="stat__label">Famílias felizes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SOBRE ======================== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="sobre__grid">
+        <div class="sobre__visual reveal">
+          <div class="sobre__img-wrap">
+            <div class="sobre__emoji-grid">
+              <div class="emoji-box emoji-box--lg">🐕</div>
+              <div class="emoji-box">🐈</div>
+              <div class="emoji-box">🐇</div>
+              <div class="emoji-box emoji-box--accent">🏠</div>
+              <div class="emoji-box emoji-box--lg">🐾</div>
+              <div class="emoji-box">❤️</div>
+            </div>
+          </div>
+          <div class="sobre__badge-float">
+            <span>🌟</span> ONG desde 2018
+          </div>
+        </div>
+        <div class="sobre__text reveal" style="animation-delay:.2s">
+          <p class="section__label">Quem somos</p>
+          <h2 class="section__title">Uma toca feita de amor, cuidado e esperança</h2>
+          <p class="sobre__desc">
+            Nascemos em 2018 com um simples propósito: nenhum animal merece sofrer nas ruas. Nossa equipe de voluntários resgata, vacina, castra e busca lares responsáveis para cães e gatos em situação de vulnerabilidade.
+          </p>
+          <p class="sobre__desc">
+            Cada doação, cada partilha, cada adoção é um passo a mais rumo a um mundo mais justo para os animais.
+          </p>
+          <ul class="sobre__values">
+            <li><span>💜</span> Amor incondicional por todos os animais</li>
+            <li><span>🌿</span> Cuidado veterinário completo e gratuito</li>
+            <li><span>🤝</span> Adoção responsável e acompanhada</li>
+            <li><span>✨</span> Transparência total nas doações</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== COMO FUNCIONA ======================== -->
+  <section class="como-funciona" id="como-funciona">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Processo</p>
+        <h2 class="section__title">Como seu apoio chega até os peludos</h2>
+        <p class="section__sub">Do resgate ao lar definitivo, acompanhamos cada passo com dedicação</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__num">01</div>
+          <div class="step__icon">🔍</div>
+          <h3 class="step__title">Resgate</h3>
+          <p class="step__desc">Recebemos denúncias e realizamos resgates de animais em situação de risco nas ruas e maus-tratos.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step reveal" style="animation-delay:.15s">
+          <div class="step__num">02</div>
+          <div class="step__icon">🏥</div>
+          <h3 class="step__title">Cuidados</h3>
+          <p class="step__desc">Vacinação, castração, vermifugação e tratamento veterinário completo custeados pelas doações.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step reveal" style="animation-delay:.3s">
+          <div class="step__num">03</div>
+          <div class="step__icon">🏡</div>
+          <h3 class="step__title">Lar Temporário</h3>
+          <p class="step__desc">Nossos animais ficam em casas de acolhimento voluntárias enquanto aguardam adoção.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step reveal" style="animation-delay:.45s">
+          <div class="step__num">04</div>
+          <div class="step__icon">❤️</div>
+          <h3 class="step__title">Adoção</h3>
+          <p class="step__desc">Realizamos triagem cuidadosa para garantir que cada pet vai para uma família amorosa e responsável.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ADOÇÃO ======================== -->
+  <section class="adocao" id="adocao">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Adoção</p>
+        <h2 class="section__title">Peludos esperando por você</h2>
+        <p class="section__sub">Cada um tem uma história. Talvez a próxima página seja com você.</p>
+      </div>
+      <div class="pets-grid">
+        <div class="pet-adopt-card reveal">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐕</span>
+            <span class="pet-adopt-card__badge">Disponível</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Thor</h3>
+          <p class="pet-adopt-card__info">🐾 Cão · 2 anos · Porte médio</p>
+          <p class="pet-adopt-card__desc">Brincalhão e cheio de energia. Adora crianças e se dá bem com outros cães. Castrado e vacinado.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+        <div class="pet-adopt-card reveal" style="animation-delay:.1s">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐈</span>
+            <span class="pet-adopt-card__badge pet-adopt-card__badge--yellow">Lar Temp.</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Mimi</h3>
+          <p class="pet-adopt-card__info">🐾 Gata · 1 ano · Pequeno porte</p>
+          <p class="pet-adopt-card__desc">Meiga e tranquila. Adora colo e ronronar. Ideal para apartamento. Castrada e vacinada.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+        <div class="pet-adopt-card reveal" style="animation-delay:.2s">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐶</span>
+            <span class="pet-adopt-card__badge">Disponível</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Pipoca</h3>
+          <p class="pet-adopt-card__info">🐾 Cadela · 4 anos · Porte pequeno</p>
+          <p class="pet-adopt-card__desc">Dócil e companheira. Passou por maus-tratos mas está recuperada e cheia de amor para dar.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+        <div class="pet-adopt-card reveal" style="animation-delay:.3s">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐈‍⬛</span>
+            <span class="pet-adopt-card__badge">Disponível</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Sombra</h3>
+          <p class="pet-adopt-card__info">🐾 Gato · 3 anos · Médio porte</p>
+          <p class="pet-adopt-card__desc">Independente mas carinhoso. Ótimo para quem ama gatos tranquilos. Castrado e vacinado.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+        <div class="pet-adopt-card reveal" style="animation-delay:.4s">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐕‍🦺</span>
+            <span class="pet-adopt-card__badge pet-adopt-card__badge--yellow">Lar Temp.</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Mel</h3>
+          <p class="pet-adopt-card__info">🐾 Cadela · 6 anos · Grande porte</p>
+          <p class="pet-adopt-card__desc">Gentil e protetora. Perfeita para uma família com quintal. Adora passear e brincar ao ar livre.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+        <div class="pet-adopt-card reveal" style="animation-delay:.5s">
+          <div class="pet-adopt-card__header">
+            <span class="pet-adopt-card__emoji">🐱</span>
+            <span class="pet-adopt-card__badge">Disponível</span>
+          </div>
+          <h3 class="pet-adopt-card__name">Canela</h3>
+          <p class="pet-adopt-card__info">🐾 Gata · 8 meses · Pequeno porte</p>
+          <p class="pet-adopt-card__desc">Filhote cheia de personalidade. Curiosa, ágil e muito afetiva. Vacinada e vermifugada.</p>
+          <a href="#contato" class="btn btn--adopt">Quero Adotar 🐾</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== DOE ======================== -->
+  <section class="doe" id="doe">
+    <div class="doe__blob"></div>
+    <div class="container">
+      <div class="doe__inner reveal">
+        <div class="doe__text">
+          <p class="section__label section__label--light">Faça a diferença</p>
+          <h2 class="doe__title">Sua doação salva <em>vidas reais</em></h2>
+          <p class="doe__sub">Com apenas R$10 por mês, você garante alimentação para um pet por uma semana. Escolha como quer ajudar:</p>
+          <ul class="doe__list">
+            <li>💊 R$30 — Vacinas e vermifugação</li>
+            <li>🍖 R$50 — Alimentação por 1 mês</li>
+            <li>✂️ R$100 — Castração de um animal</li>
+            <li>🏥 R$200 — Consulta veterinária completa</li>
+          </ul>
+        </div>
+        <div class="doe__form-wrap">
+          <form class="doe__form" id="doeForm">
+            <h3 class="doe__form-title">Escolha o valor</h3>
+            <div class="valor-btns">
+              <button type="button" class="valor-btn active" data-valor="30">R$30</button>
+              <button type="button" class="valor-btn" data-valor="50">R$50</button>
+              <button type="button" class="valor-btn" data-valor="100">R$100</button>
+              <button type="button" class="valor-btn" data-valor="200">R$200</button>
+            </div>
+            <div class="form-group">
+              <label>Outro valor</label>
+              <input type="number" id="outroValor" placeholder="R$ 0,00" min="1" />
+            </div>
+            <div class="form-group">
+              <label>Seu nome</label>
+              <input type="text" placeholder="Como podemos te chamar?" />
+            </div>
+            <div class="form-group">
+              <label>Seu e-mail</label>
+              <input type="email" placeholder="seu@email.com" />
+            </div>
+            <div class="form-type">
+              <button type="button" class="type-btn active" data-type="unica">Única</button>
+              <button type="button" class="type-btn" data-type="mensal">Mensal</button>
+            </div>
+            <button type="submit" class="btn btn--donate-submit">Fazer Doação ❤️</button>
+            <p class="doe__security">🔒 Pagamento 100% seguro e transparente</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== DEPOIMENTOS ======================== -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="container">
+      <div class="section__header reveal">
+        <p class="section__label">Histórias reais</p>
+        <h2 class="section__title">Quem adotou, transformou</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"Adotei a Cacau há 2 anos pela Toca dos Peludos. Ela mudou completamente a minha vida. Nunca imaginei que um animal pudesse trazer tanta alegria."</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">👩</span>
+            <div>
+              <strong>Ana Paula Silva</strong>
+              <span>Adotou a Cacau em 2022</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal" style="animation-delay:.15s">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"O processo foi muito transparente e cuidadoso. A equipe fez questão de me orientar sobre os cuidados. Hoje o Rex é parte da família!"</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">👨</span>
+            <div>
+              <strong>Carlos Eduardo</strong>
+              <span>Adotou o Rex em 2023</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal" style="animation-delay:.3s">
+          <div class="testimonial__stars">⭐⭐⭐⭐⭐</div>
+          <p class="testimonial__text">"Doo mensalmente há 1 ano. Recebo atualizações de como meu dinheiro é usado. Saber que estou ajudando peludos reais é muito gratificante."</p>
+          <div class="testimonial__author">
+            <span class="testimonial__avatar">👩‍🦱</span>
+            <div>
+              <strong>Mariana Ferreira</strong>
+              <span>Doadora recorrente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CONTATO ======================== -->
+  <section class="contato" id="contato">
+    <div class="container">
+      <div class="contato__grid">
+        <div class="contato__info reveal">
+          <p class="section__label">Fale conosco</p>
+          <h2 class="section__title">Estamos aqui para ajudar</h2>
+          <p class="contato__sub">Tem dúvidas sobre adoção, doação ou quer ser voluntário? Entre em contato!</p>
+          <ul class="contato__list">
+            <li><span>📧</span> contato@tocadospeludos.org.br</li>
+            <li><span>📱</span> (11) 99999-0000</li>
+            <li><span>📍</span> São Paulo, SP — Brasil</li>
+            <li><span>🕐</span> Seg-Sex: 9h às 18h</li>
+          </ul>
+          <div class="contato__social">
+            <a href="#" class="social-btn">📘</a>
+            <a href="#" class="social-btn">📸</a>
+            <a href="#" class="social-btn">🐦</a>
+            <a href="#" class="social-btn">📺</a>
+          </div>
+        </div>
+        <form class="contato__form reveal" style="animation-delay:.2s" id="contatoForm">
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" placeholder="Seu nome" required />
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="seu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="text" placeholder="(11) 90000-0000" class="form-control {% if 'telefone' in campos_vazios %}is-invalid{% endif %}" name="telefone">
+          </div>
+
+          <div class="form-group">
+            <label>Endereço</label>
+            <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
+          </div>
+      
+          <div class="form-group">
+            <label>CEP</label>
+            <input type="text" class="form-control" name="cep" placeholder="00000-000" maxlength="9">
+          </div>
+          <div class="form-group">
+            <label>Assunto</label>
+            <select>
+              <option value="">Selecione...</option>
+              <option>Quero adotar</option>
+              <option>Quero fazer doação</option>
+              <option>Quero ser voluntário</option>
+              <option>Denúncia de maus-tratos</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Possui outros Pets?</label>
+            <select class="form-select" name="possui_outros_pets">
+              <option value="" selected>Selecione:</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Já teve experiência com Pets antes?</label>
+            <select class="form-select" name="experiencia_pets">
+              <option value="" selected>Selecione:</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>      
+          </div>
+        
+          <div class="form-group">
+            <label>Por que você deseja adotar um Pet?</label>
+            <input type="text" class="form-control" name="motivo_adocao">
+          </div>
+          <div class="form-group">
+            <label>Documento de Identificação:</label>
+            <input type="file" name="documento" multiple accept="image/*" class="file">  
+          </div>    
+        
+          <div class="form-group">
+            <label>Fotos da sua Moradia:</label>
+            <input type="file" name="fotos_moradia" multiple accept="image/*" class="file">
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea placeholder="Escreva sua mensagem..." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary" style="width:100%">Enviar Mensagem 🐾</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">🐾 Toca dos Peludos</div>
+          <p class="footer__tagline">Resgatamos, cuidamos e encontramos lares para quem mais precisa.</p>
+          <div class="footer__social">
+            <a href="#" class="social-btn social-btn--sm">📘</a>
+            <a href="#" class="social-btn social-btn--sm">📸</a>
+            <a href="#" class="social-btn social-btn--sm">🐦</a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <h4>ONG</h4>
+          <ul>
+            <li><a href="#sobre">Sobre nós</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#adocao">Adoção</a></li>
+            <li><a href="#depoimentos">Histórias</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4>Ajude</h4>
+          <ul>
+            <li><a href="#doe">Fazer doação</a></li>
+            <li><a href="#contato">Ser voluntário</a></li>
+            <li><a href="#contato">Lar temporário</a></li>
+            <li><a href="#contato">Denúncias</a></li>
+          </ul>
+        </div>
+        <div class="footer__newsletter">
+          <h4>Receba novidades</h4>
+          <p>Fique por dentro dos resgates e adoções realizadas.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="seu@email.com" />
+            <button type="button">→</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Toca dos Peludos — CNPJ 00.000.000/0001-00</span>
+        <span>Feito com ❤️ por voluntários</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SUCCESS TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast__icon">✅</span>
+    <span class="toast__msg" id="toastMsg">Mensagem enviada!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
