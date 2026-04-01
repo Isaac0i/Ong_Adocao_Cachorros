@@ -14,58 +14,51 @@
   <body>
     <nav class="nav">
         <ul class="nav-list">
-            <li><a href="#aboutUs">Sobre Nós</a></li>
-            <li><a href="#dogs">Nossos Bichinhos</a></li>
-            <li><a href="#">Adote Um!</a></li>
+            <li><a href="index">Sobre Nós</a></li>
+            <li><a href="index">Nossos Bichinhos</a></li>
+            <li><a href="forms">Adote Um!</a></li>
             <li><a href="{% url 'logout' %}">Sair</a></li>
         </ul>
     </nav>
 
-    <h1>Painel Admin</h1>
+    <h1 id="title_adm">Painel Admin</h1>
 
-    <div class="tabela-wrapper">
-        <div class="filtro">
-            <form method="GET" action="{% url 'admin' %}" id="form-filtros">
-
-                <div class="filtros-bar">
-                    
-                    <!-- Campo de pesquisa -->
-                    <input type="text" 
-                        name="pesquisa" 
-                        placeholder="🔍 Pesquisar por nome..." 
-                        class="form-control filtro-pesquisa"
-                        value="{{ pesquisa }}"
-                        oninput="debounceSubmit()">
-
-                    <!-- Ordenação -->
-                    <select name="ordem" class="form-select filtro-select" onchange="this.form.submit()">
-                        <option value="id_asc" {% if ordem == 'id_asc' %}selected{% endif %}>ID: ↑ Menor para Maior</option>
-                        <option value="id_desc" {% if ordem == 'id_desc' %}selected{% endif %}>ID: ↓ Maior para Menor</option>
-                        <option value="nome_asc" {% if ordem == 'nome_asc' %}selected{% endif %}>Nome: A → Z</option>
-                        <option value="nome_desc" {% if ordem == 'nome_desc' %}selected{% endif %}>Nome: Z → A</option>
-                    </select>
-
-                    <!-- Status -->
-                    <select name="status" class="form-select filtro-select" onchange="this.form.submit()">
-                        <option value="" {% if not status %}selected{% endif %}>Todos</option>
-                        <option value="em_analise" {% if status == 'em_analise' %}selected{% endif %}>⏳ Aguardando Análise</option>
-                        <option value="aprovado" {% if status == 'aprovado' %}selected{% endif %}>✅ Aprovados</option>
-                        <option value="reprovado" {% if status == 'reprovado' %}selected{% endif %}>❌ Reprovados</option>
-                    </select>
-
-                    <!-- Limpar filtros -->
-                    <a href="{% url 'admin' %}" class="btn-limpar">✕ Limpar</a>
-
-                </div>
-
-            </form>
-        </div>
-
+    
         <section class="infosTable">
 
             <div class="tableContainer">
+
                 <table id="admTable" action="{% url 'admin' %}"> {% csrf_token %}
                     <thead>
+                        <form method="GET" action="{% url 'admin' %}" id="form-filtros">
+                        <tr>
+                            <th colspan="8">
+                                <div class="filtros-bar">
+            
+                                    <input type="text" 
+                                        name="pesquisa" 
+                                        placeholder="🔍 Pesquisar por nome..." 
+                                        class="form-control filtro-pesquisa"
+                                        value="{{ pesquisa }}"
+                                        oninput="debounceSubmit()">
+
+                                    <select name="ordem" class="form-select filtro-select" onchange="this.form.submit()">
+                                        <option value="id_asc">ID: ↑ Menor para Maior</option>
+                                        <option value="id_desc">ID: ↓ Maior para Menor</option>
+                                    </select>
+
+                                    <select name="status" class="form-select filtro-select" onchange="this.form.submit()">
+                                        <option value="">Todos</option>
+                                        <option value="em_analise">⏳ Aguardando Análise</option>
+                                        <option value="aprovado">✅ Aprovados</option>
+                                        <option value="reprovado">❌ Reprovados</option>
+                                    </select>
+
+                                    <a href="{% url 'admin' %}" class="btn-limpar">✕ Limpar</a>                                    
+                                </div>
+                            </th>
+                        </tr>
+                        </form>
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nome Completo</th>

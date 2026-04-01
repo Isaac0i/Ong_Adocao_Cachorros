@@ -230,6 +230,7 @@ footer {
 }
 
 #admTable{
+    border-radius: 0 0 8px 8px;
     width: 98%;
     max-width: 1500px;
     background-color: var(--color-cards-background);
@@ -406,8 +407,6 @@ footer {
     font-weight: 500;
 }
 
-/* DESCRIÇÃO */
-
 /* FILTRO DE PESQUINA PAGINA ADMIN */
 .filtro {
     width: 98%;
@@ -538,7 +537,6 @@ footer {
     border-radius: 20px;
 }
 
-/* Estilo das Setas igual à foto */
 .prev, .next {
     position: absolute;
     top: 50%;
@@ -589,7 +587,6 @@ footer {
     text-align: left;    
 }
 
-/* Ajuste das setas para ficarem sobrepostas */
 .prev, .next {
     position: absolute;
     top: 50%;
@@ -611,9 +608,48 @@ footer {
 .prev { left: -20px; }
 .next { right: -20px; }
 
-/* Ajuste do container para esconder o que sobra */
+
 .carousel-container {
     overflow: hidden;
     width: 100%;
     padding: 10px;
+}
+
+.filtros-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+
+    background-color: var(--color-title); 
+    color: white;
+}
+
+.filtro-pesquisa,
+.filtro-select {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+}
+
+.filtro-pesquisa::placeholder {
+    color: #eee;
+}
+
+.filtro-select {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+}
+
+.filtro-select option {
+    color: #333;
+    background-color: #fff;
+}
+
+#title_adm {
+    text-align: center;
+    margin: 20px 0;
 }
