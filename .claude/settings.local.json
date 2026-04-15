@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python manage.py check)",
+      "Bash(python -c \"from django.conf import settings; import django; django.setup\\(\\); print\\('STATIC_URL:', settings.STATIC_URL\\); print\\('DEBUG:', settings.DEBUG\\); print\\('STATICFILES_DIRS:', getattr\\(settings, 'STATICFILES_DIRS', 'not set'\\)\\)\")",
+      "Bash(python manage.py shell -c \"from django.conf import settings; print\\('STATIC_URL:', settings.STATIC_URL\\); print\\('DEBUG:', settings.DEBUG\\)\")"
+    ]
+  }
+}

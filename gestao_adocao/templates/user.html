@@ -1,289 +1,323 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'style/user.css' %}">
-    <title>Informações do Usuario</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ cadastro.nome_completo }} — Toca dos Peludos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style/user.css' %}">
 </head>
 <body>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="overlay-msg overlay-{{ message.tags }}">
-                <div class="overlay-content">{{ message }}</div>
+
+  <!-- Notificações -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="overlay-msg overlay-{{ message.tags }}">
+        {% if message.tags == 'success' %}✅{% else %}⚠️{% endif %}
+        <div>{{ message }}</div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-icon">🐾</span>
+      <span>Toca dos Peludos</span>
+    </div>
+    <ul class="nav__links">
+      <li><a href="{% url 'admin' %}">← Painel</a></li>
+      <li><a href="{% url 'novo' %}">🏠 Site</a></li>
+      <li><a href="{% url 'logout' %}" class="btn--logout">Sair</a></li>
+    </ul>
+    <button class="nav__burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- Header com gradiente verde -->
+    <header class="page-header">
+      <a href="{% url 'admin' %}" class="back-link">← Voltar ao Painel</a>
+      <div class="header-title">
+        <h1>{{ cadastro.nome_completo }}</h1>
+        <span class="status-badge status-{{ cadastro.status }}">
+          {% if cadastro.status == 'em_analise' %}⏳
+          {% elif cadastro.status == 'aprovado'  %}✅
+          {% else %}❌{% endif %}
+          {{ cadastro.get_status_display }}
+        </span>
+      </div>
+    </header>
+
+    <!-- Botões de ação -->
+    <div id="btn-editar-wrapper">
+      <button type="button" onclick="ativarEdicao()" class="btn-editar-topo">✏️ Editar Cadastro</button>
+      <button type="button" class="btn-deletar" data-bs-toggle="modal" data-bs-target="#modalDeletar">🗑️ Deletar Cadastro</button>
+    </div>
+
+    <!-- ══ FORMULÁRIO DE EDIÇÃO ══ -->
+    <form id="form-edicao" method="POST" action="{% url 'user' cadastro.id %}" enctype="multipart/form-data" style="display:none">
+      {% csrf_token %}
+      <input type="hidden" name="acao" value="editar">
+      <div class="content">
+
+        <section class="card">
+          <div class="card-header">
+            <span class="card-icon">👤</span><h2>Informações Pessoais</h2>
+          </div>
+          <div class="card-grid">
+            <div class="field"><label>Nome Completo</label><input type="text" class="form-control" name="nome" value="{{ cadastro.nome_completo }}"></div>
+            <div class="field"><label>E-mail</label><input type="email" class="form-control" name="email" value="{{ cadastro.email }}"></div>
+            <div class="field"><label>Telefone</label><input type="text" class="form-control" name="telefone" value="{{ cadastro.telefone }}"></div>
+            <div class="field"><label>Endereço</label><input type="text" class="form-control" name="endereco" value="{{ cadastro.endereco }}"></div>
+            <div class="field"><label>CEP</label><input type="text" class="form-control" name="cep" value="{{ cadastro.cep }}"></div>
+            <div class="field">
+              <label>Renda Familiar</label>
+              <select class="form-select" name="renda_familiar">
+                <option value="ate_2000"   {% if cadastro.renda_familiar == 'ate_2000'   %}selected{% endif %}>R$1.000 a R$2.000</option>
+                <option value="ate_3000"   {% if cadastro.renda_familiar == 'ate_3000'   %}selected{% endif %}>R$2.000 a R$3.000</option>
+                <option value="acima_3000" {% if cadastro.renda_familiar == 'acima_3000' %}selected{% endif %}>Acima de R$3.000</option>
+              </select>
             </div>
-        {% endfor %}
-    {% endif %}     
-
-    <div class="page-wrapper">
-
-        <header class="page-header">
-            <a href="{% url 'admin' %}" class="back-link">← Voltar ao Painel</a>
-            <div class="header-title">
-                <h1>{{ cadastro.nome_completo }}</h1>
-                <span class="status-badge status-{{ cadastro.status }}">{{ cadastro.get_status_display }}</span>
+            <div class="field">
+              <label>Pessoas na Família</label>
+              <select class="form-select" name="pessoas_na_familia">
+                <option value="1"       {% if cadastro.pessoas_na_familia == '1'       %}selected{% endif %}>1 pessoa</option>
+                <option value="2"       {% if cadastro.pessoas_na_familia == '2'       %}selected{% endif %}>2 pessoas</option>
+                <option value="3"       {% if cadastro.pessoas_na_familia == '3'       %}selected{% endif %}>3 pessoas</option>
+                <option value="4"       {% if cadastro.pessoas_na_familia == '4'       %}selected{% endif %}>4 pessoas</option>
+                <option value="5"       {% if cadastro.pessoas_na_familia == '5'       %}selected{% endif %}>5 pessoas</option>
+                <option value="acima_5" {% if cadastro.pessoas_na_familia == 'acima_5' %}selected{% endif %}>Acima de 5</option>
+              </select>
             </div>
-        </header>
+          </div>
+        </section>
 
-        <div class="d-flex gap-2 mb-3" id="btn-editar-wrapper">
-            <button type="button" onclick="ativarEdicao()" class="btn-editar-topo">✏️ Editar Cadastro</button>
-            <button type="button" class="btn-deletar" data-bs-toggle="modal" data-bs-target="#modalDeletar">🗑️ Deletar Cadastro</button>
-        </div>
-
-        <!-- FORMULÁRIO DE EDIÇÃO -->
-        <form id="form-edicao" method="POST" action="{% url 'user' cadastro.id %}" enctype="multipart/form-data" style="display:none">
-            {% csrf_token %}
-            <input type="hidden" name="acao" value="editar">
-            <div class="content">
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">👤</span><h2>Informações Pessoais</h2></div>
-                    <div class="card-grid">
-                        <div class="field"><label>Nome Completo</label><input type="text" class="form-control" name="nome" value="{{ cadastro.nome_completo }}"></div>
-                        <div class="field"><label>E-mail</label><input type="email" class="form-control" name="email" value="{{ cadastro.email }}"></div>
-                        <div class="field"><label>Telefone</label><input type="text" class="form-control" name="telefone" value="{{ cadastro.telefone }}"></div>
-                        <div class="field"><label>Endereço</label><input type="text" class="form-control" name="endereco" value="{{ cadastro.endereco }}"></div>
-                        <div class="field"><label>CEP</label><input type="text" class="form-control" name="cep" value="{{ cadastro.cep }}"></div>
-                        <div class="field">
-                            <label>Renda Familiar</label>
-                            <select class="form-select" name="renda_familiar">
-                                <option value="ate_2000" {% if cadastro.renda_familiar == 'ate_2000' %}selected{% endif %}>R$1.000 a R$2.000</option>
-                                <option value="ate_3000" {% if cadastro.renda_familiar == 'ate_3000' %}selected{% endif %}>R$2.000 a R$3.000</option>
-                                <option value="acima_3000" {% if cadastro.renda_familiar == 'acima_3000' %}selected{% endif %}>Acima de R$3.000</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label>Pessoas na Família</label>
-                            <select class="form-select" name="pessoas_na_familia">
-                                <option value="1" {% if cadastro.pessoas_na_familia == '1' %}selected{% endif %}>1 pessoa</option>
-                                <option value="2" {% if cadastro.pessoas_na_familia == '2' %}selected{% endif %}>2 pessoas</option>
-                                <option value="3" {% if cadastro.pessoas_na_familia == '3' %}selected{% endif %}>3 pessoas</option>
-                                <option value="4" {% if cadastro.pessoas_na_familia == '4' %}selected{% endif %}>4 pessoas</option>
-                                <option value="5" {% if cadastro.pessoas_na_familia == '5' %}selected{% endif %}>5 pessoas</option>
-                                <option value="acima_5" {% if cadastro.pessoas_na_familia == 'acima_5' %}selected{% endif %}>Acima de 5</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">🏠</span><h2>Informações de Moradia</h2></div>
-                    <div class="card-grid">
-                        <div class="field">
-                            <label>Tipo de Moradia</label>
-                            <select class="form-select" name="tipo_moradia">
-                                <option value="casa" {% if cadastro.tipo_moradia == 'casa' %}selected{% endif %}>Casa</option>
-                                <option value="apartamento" {% if cadastro.tipo_moradia == 'apartamento' %}selected{% endif %}>Apartamento</option>
-                                <option value="chacara" {% if cadastro.tipo_moradia == 'chacara' %}selected{% endif %}>Chácara</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label>Possui Outros Pets</label>
-                            <select class="form-select" name="possui_outros_pets">
-                                <option value="sim" {% if cadastro.possui_outros_pets == 'sim' %}selected{% endif %}>Sim</option>
-                                <option value="nao" {% if cadastro.possui_outros_pets == 'nao' %}selected{% endif %}>Não</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">🐶|🐱</span><h2>Experiência com Pets</h2></div>
-                    <div class="card-grid">
-                        <div class="field">
-                            <label>Experiência prévia</label>
-                            <select class="form-select" name="experiencia_pets">
-                                <option value="sim" {% if cadastro.experiencia_pets == 'sim' %}selected{% endif %}>Sim</option>
-                                <option value="nao" {% if cadastro.experiencia_pets == 'nao' %}selected{% endif %}>Não</option>
-                            </select>
-                        </div>
-                        <div class="field field--full">
-                            <label>Motivo da Adoção</label>
-                            <textarea class="form-control" name="motivo_adocao" rows="4">{{ cadastro.motivo_adocao }}</textarea>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">📄</span><h2>Documentação</h2></div>
-                    <div class="field">
-                        <label>Documentos atuais — marque para deletar:</label>
-                        <div class="fotos-grid mb-3">
-                            {% for doc in cadastro.documentos.all %}
-                                <div class="text-center">
-                                    <img src="{{ doc.doc_identificacao.url }}" class="foto-moradia">
-                                    <div class="form-check mt-1">
-                                        <input class="form-check-input" type="checkbox" name="deletar_doc" value="{{ doc.id }}" id="doc_{{ doc.id }}">
-                                        <label class="form-check-label text-danger" for="doc_{{ doc.id }}">🗑️ Deletar</label>
-                                    </div>
-                                </div>
-                            {% empty %}
-                                <p class="empty-msg">Nenhum documento cadastrado.</p>
-                            {% endfor %}
-                        </div>
-                        <label>Adicionar novos documentos (máx. 3):</label>
-                        <input type="file" class="form-control" name="novos_documentos" multiple accept="image/*">
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">📷</span><h2>Fotos da Residência</h2></div>
-                    <div class="field">
-                        <label>Fotos atuais — marque para deletar:</label>
-                        <div class="fotos-grid mb-3">
-                            {% for foto in cadastro.fotos.all %}
-                                <div class="text-center">
-                                    <img src="{{ foto.foto.url }}" class="foto-moradia">
-                                    <div class="form-check mt-1">
-                                        <input class="form-check-input" type="checkbox" name="deletar_foto" value="{{ foto.id }}" id="foto_{{ foto.id }}">
-                                        <label class="form-check-label text-danger" for="foto_{{ foto.id }}">🗑️ Deletar</label>
-                                    </div>
-                                </div>
-                            {% empty %}
-                                <p class="empty-msg">Nenhuma foto cadastrada.</p>
-                            {% endfor %}
-                        </div>
-                        <label>Adicionar novas fotos:</label>
-                        <input type="file" class="form-control" name="novas_fotos" multiple>
-                    </div>
-                </section>
-
+        <section class="card">
+          <div class="card-header"><span class="card-icon">🏠</span><h2>Informações de Moradia</h2></div>
+          <div class="card-grid">
+            <div class="field">
+              <label>Tipo de Moradia</label>
+              <select class="form-select" name="tipo_moradia">
+                <option value="casa"        {% if cadastro.tipo_moradia == 'casa'        %}selected{% endif %}>Casa</option>
+                <option value="apartamento" {% if cadastro.tipo_moradia == 'apartamento' %}selected{% endif %}>Apartamento</option>
+                <option value="chacara"     {% if cadastro.tipo_moradia == 'chacara'     %}selected{% endif %}>Chácara</option>
+              </select>
             </div>
-            <div class="action-bar">
-                <button type="button" onclick="cancelarEdicao()" class="btn-rejeitar">✕ Cancelar</button>
-                <button type="submit" class="btn-aprovar">💾 Salvar Alterações</button>
+            <div class="field">
+              <label>Possui Outros Pets</label>
+              <select class="form-select" name="possui_outros_pets">
+                <option value="sim" {% if cadastro.possui_outros_pets == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if cadastro.possui_outros_pets == 'nao' %}selected{% endif %}>Não</option>
+              </select>
             </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">🐶</span><h2>Experiência com Pets</h2></div>
+          <div class="card-grid">
+            <div class="field">
+              <label>Experiência prévia</label>
+              <select class="form-select" name="experiencia_pets">
+                <option value="sim" {% if cadastro.experiencia_pets == 'sim' %}selected{% endif %}>Sim</option>
+                <option value="nao" {% if cadastro.experiencia_pets == 'nao' %}selected{% endif %}>Não</option>
+              </select>
+            </div>
+            <div class="field field--full">
+              <label>Motivo da Adoção</label>
+              <textarea class="form-control" name="motivo_adocao" rows="3">{{ cadastro.motivo_adocao }}</textarea>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">📄</span><h2>Documentação</h2></div>
+          <div class="field" style="padding:20px 28px">
+            <label>Documentos atuais — marque para deletar:</label>
+            <div class="fotos-grid" style="padding:12px 0 16px">
+              {% for doc in cadastro.documentos.all %}
+                <div class="text-center">
+                  <img src="{{ doc.doc_identificacao.url }}" class="foto-moradia">
+                  <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" name="deletar_doc" value="{{ doc.id }}" id="doc_{{ doc.id }}">
+                    <label class="form-check-label small text-danger fw-bold" for="doc_{{ doc.id }}">🗑️ Deletar</label>
+                  </div>
+                </div>
+              {% empty %}
+                <p class="empty-msg">Nenhum documento cadastrado.</p>
+              {% endfor %}
+            </div>
+            <label style="margin-top:8px">Adicionar novos documentos (máx. 3):</label>
+            <input type="file" class="form-control mt-2" name="novos_documentos" multiple accept="image/*">
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">📷</span><h2>Fotos da Residência</h2></div>
+          <div class="field" style="padding:20px 28px">
+            <label>Fotos atuais — marque para deletar:</label>
+            <div class="fotos-grid" style="padding:12px 0 16px">
+              {% for foto in cadastro.fotos.all %}
+                <div class="text-center">
+                  <img src="{{ foto.foto.url }}" class="foto-moradia">
+                  <div class="form-check mt-1">
+                    <input class="form-check-input" type="checkbox" name="deletar_foto" value="{{ foto.id }}" id="foto_{{ foto.id }}">
+                    <label class="form-check-label small text-danger fw-bold" for="foto_{{ foto.id }}">🗑️ Deletar</label>
+                  </div>
+                </div>
+              {% empty %}
+                <p class="empty-msg">Nenhuma foto cadastrada.</p>
+              {% endfor %}
+            </div>
+            <label style="margin-top:8px">Adicionar novas fotos:</label>
+            <input type="file" class="form-control mt-2" name="novas_fotos" multiple>
+          </div>
+        </section>
+
+      </div>
+      <div class="action-bar">
+        <button type="button" onclick="cancelarEdicao()" class="btn-rejeitar">✕ Cancelar</button>
+        <button type="submit" class="btn-aprovar">💾 Salvar Alterações</button>
+      </div>
+    </form>
+
+    <!-- ══ MODO VISUALIZAÇÃO ══ -->
+    <div id="visualizacao">
+      <div class="content">
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">👤</span><h2>Informações Pessoais</h2></div>
+          <div class="card-grid">
+            <div class="field"><label>Nome Completo</label><p>{{ cadastro.nome_completo }}</p></div>
+            <div class="field"><label>E-mail</label><p>{{ cadastro.email }}</p></div>
+            <div class="field"><label>Telefone</label><p>{{ cadastro.telefone }}</p></div>
+            <div class="field"><label>Endereço</label><p>{{ cadastro.endereco }}</p></div>
+            <div class="field"><label>CEP</label><p>{{ cadastro.cep }}</p></div>
+            <div class="field"><label>Renda Familiar</label><p>{{ cadastro.get_renda_familiar_display }}</p></div>
+            <div class="field"><label>Pessoas na Família</label><p>{{ cadastro.get_pessoas_na_familia_display }}</p></div>
+            <div class="field"><label>Cadastrado em</label><p>{{ cadastro.criado_em }}</p></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">🏠</span><h2>Informações de Moradia</h2></div>
+          <div class="card-grid">
+            <div class="field"><label>Tipo de Moradia</label><p>{{ cadastro.get_tipo_moradia_display }}</p></div>
+            <div class="field"><label>Possui Outros Pets</label><p class="tag tag--{{ cadastro.possui_outros_pets }}">{{ cadastro.get_possui_outros_pets_display }}</p></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">🐶</span><h2>Experiência com Pets</h2></div>
+          <div class="card-grid">
+            <div class="field"><label>Experiência prévia</label><p class="tag tag--{{ cadastro.experiencia_pets }}">{{ cadastro.get_experiencia_pets_display }}</p></div>
+            <div class="field field--full"><label>Motivo da Adoção</label><p class="motivo-text">{{ cadastro.motivo_adocao }}</p></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">📄</span><h2>Documentação</h2></div>
+          <div class="fotos-grid">
+            {% for doc in cadastro.documentos.all %}
+              <img src="{{ doc.doc_identificacao.url }}" class="foto-moradia"
+                data-bs-toggle="modal" data-bs-target="#modalDoc{{ forloop.counter }}" alt="Documento">
+              <div class="modal fade" id="modalDoc{{ forloop.counter }}" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header"><h5 class="modal-title">Documento de Identificação</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                    <div class="modal-body text-center"><img src="{{ doc.doc_identificacao.url }}" class="img-fluid rounded"></div>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <p class="empty-msg">Nenhum documento cadastrado.</p>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header"><span class="card-icon">📷</span><h2>Fotos da Residência</h2></div>
+          <div class="fotos-grid">
+            {% for foto in cadastro.fotos.all %}
+              <img src="{{ foto.foto.url }}" class="foto-moradia"
+                data-bs-toggle="modal" data-bs-target="#modalFoto{{ forloop.counter }}" alt="Foto da moradia">
+              <div class="modal fade" id="modalFoto{{ forloop.counter }}" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header"><h5 class="modal-title">Foto da Residência</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                    <div class="modal-body text-center"><img src="{{ foto.foto.url }}" class="img-fluid rounded"></div>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <p class="empty-msg">Nenhuma foto cadastrada.</p>
+            {% endfor %}
+          </div>
+        </section>
+
+      </div>
+
+      <div class="action-bar">
+        <form method="POST" action="{% url 'user' cadastro.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="acao" value="reprovado">
+          <button type="submit" class="btn-rejeitar">✕ Rejeitar Solicitação</button>
         </form>
-
-        <!-- MODO VISUALIZAÇÃO -->
-        <div id="visualizacao">
-            <div class="content">
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">👤</span><h2>Informações Pessoais</h2></div>
-                    <div class="card-grid">
-                        <div class="field"><label>Nome Completo</label><p>{{ cadastro.nome_completo }}</p></div>
-                        <div class="field"><label>E-mail</label><p>{{ cadastro.email }}</p></div>
-                        <div class="field"><label>Telefone</label><p>{{ cadastro.telefone }}</p></div>
-                        <div class="field"><label>Endereço</label><p>{{ cadastro.endereco }}</p></div>
-                        <div class="field"><label>CEP</label><p>{{ cadastro.cep }}</p></div>
-                        <div class="field"><label>Renda Familiar</label><p>{{ cadastro.get_renda_familiar_display }}</p></div>
-                        <div class="field"><label>Pessoas na Família</label><p>{{ cadastro.get_pessoas_na_familia_display }}</p></div>
-                        <div class="field"><label>Cadastrado em:</label><p>{{ cadastro.criado_em }}</p></div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">🏠</span><h2>Informações de Moradia</h2></div>
-                    <div class="card-grid">
-                        <div class="field"><label>Tipo de Moradia</label><p>{{ cadastro.get_tipo_moradia_display }}</p></div>
-                        <div class="field"><label>Possui Outros Pets</label><p class="tag tag--{{ cadastro.possui_outros_pets }}">{{ cadastro.get_possui_outros_pets_display }}</p></div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">🐶|🐱</span><h2>Experiência com Pets</h2></div>
-                    <div class="card-grid">
-                        <div class="field"><label>Experiência prévia</label><p class="tag tag--{{ cadastro.experiencia_pets }}">{{ cadastro.get_experiencia_pets_display }}</p></div>
-                        <div class="field field--full"><label>Motivo da Adoção</label><p class="motivo-text">{{ cadastro.motivo_adocao }}</p></div>
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">📄</span><h2>Documentação</h2></div>
-                    <div class="fotos-grid">
-                        {% for doc in cadastro.documentos.all %}
-                            <img src="{{ doc.doc_identificacao.url }}"
-                                class="foto-moradia"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalDoc{{ forloop.counter }}"
-                                alt="Documento">
-                            <div class="modal fade" id="modalDoc{{ forloop.counter }}" tabindex="-1">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Documento de Identificação</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <img src="{{ doc.doc_identificacao.url }}" class="img-fluid">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% empty %}
-                            <p class="empty-msg">Nenhum documento cadastrado.</p>
-                        {% endfor %}
-                    </div>
-                </section>
-
-                <section class="card">
-                    <div class="card-header"><span class="card-icon">📷</span><h2>Fotos da Residência</h2></div>
-                    <div class="fotos-grid">
-                        {% for foto in cadastro.fotos.all %}
-                            <img src="{{ foto.foto.url }}" class="foto-moradia" data-bs-toggle="modal" data-bs-target="#modalFoto{{ forloop.counter }}" alt="Foto da moradia">
-                            <div class="modal fade" id="modalFoto{{ forloop.counter }}" tabindex="-1">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Foto da Residência</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body text-center"><img src="{{ foto.foto.url }}" class="img-fluid"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% empty %}
-                            <p class="empty-msg">Nenhuma foto cadastrada.</p>
-                        {% endfor %}
-                    </div>
-                </section>
-
-            </div>
-
-            <div class="action-bar">
-                <form method="POST" action="{% url 'user' cadastro.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="acao" value="reprovado">
-                    <button type="submit" class="btn-rejeitar">✕ Rejeitar Solicitação</button>
-                </form>
-                <form method="POST" action="{% url 'user' cadastro.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="acao" value="aprovado">
-                    <button type="submit" class="btn-aprovar">✓ Aprovar Solicitação</button>
-                </form>
-            </div>
-        </div>
-
+        <form method="POST" action="{% url 'user' cadastro.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="acao" value="aprovado">
+          <button type="submit" class="btn-aprovar">✓ Aprovar Solicitação</button>
+        </form>
+      </div>
     </div>
 
-    <!-- Modal Deletar -->
-    <div class="modal fade" id="modalDeletar" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">⚠️ Confirmar exclusão</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Tem certeza que deseja deletar o cadastro de <strong>{{ cadastro.nome_completo }}</strong>?</p>
-                    <p class="text-danger">⚠️ Esta ação é irreversível e todos os dados serão perdidos permanentemente.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form method="POST" action="{% url 'user' cadastro.id %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="acao" value="deletar">
-                        <button type="submit" class="btn btn-danger">Sim, deletar!</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/user.js' %}"></script>
+  <!-- Modal Deletar -->
+  <div class="modal fade" id="modalDeletar" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">⚠️ Confirmar exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p style="color:var(--forest);font-size:.95rem;margin-bottom:10px">
+            Tem certeza que deseja deletar o cadastro de <strong>{{ cadastro.nome_completo }}</strong>?
+          </p>
+          <p style="color:#dc2626;font-size:.87rem;font-weight:600">
+            ⚠️ Esta ação é irreversível — todos os dados serão perdidos permanentemente.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <form method="POST" action="{% url 'user' cadastro.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="acao" value="deletar">
+            <button type="submit" class="btn btn-danger fw-bold">Sim, deletar!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/user.js' %}"></script>
+  <script>
+    // Nav burger
+    const burger = document.getElementById('burger');
+    if(burger){
+      burger.addEventListener('click', () => burger.classList.toggle('open'));
+    }
+    // Auto dismiss notifications
+    document.querySelectorAll('.overlay-msg').forEach(el => {
+      setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity .4s'; setTimeout(()=>el.remove(),400); }, 4000);
+    });
+  </script>
 </body>
 </html>

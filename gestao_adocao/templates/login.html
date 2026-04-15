@@ -1,41 +1,113 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Login - Toca dos Peludos</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entrar — Toca dos Peludos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'style/login.css' %}">
 </head>
 <body>
 
-    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="card p-4" style="width: 100%; max-width: 400px;">
-
-            <h2 class="text-center mb-4">🐾 Painel Admin</h2>
-
-            {% if erro %}
-                <div class="alert alert-danger">{{ erro }}</div>
-            {% endif %}
-
-            <form method="POST" action="{% url 'login' %}">
-                {% csrf_token %}
-
-                <div class="mb-3">
-                    <label>Usuário</label>
-                    <input type="text" class="form-control" name="username" placeholder="Digite seu usuário">
-                </div>
-
-                <div class="mb-3">
-                    <label>Senha</label>
-                    <input type="password" class="form-control" name="password" placeholder="Digite sua senha">
-                </div>
-
-                <button type="submit" class="btn btn-warning w-100">Entrar</button>
-            </form>
-
-        </div>
+  <!-- ══ LADO ESQUERDO ══ -->
+  <aside class="login-left">
+    <div class="paw-bg">
+      <span style="top:8%;  left:10%; --dur:11s; --del:0s">🐾</span>
+      <span style="top:25%; right:8%; --dur:14s; --del:2s; font-size:1.2rem">🐾</span>
+      <span style="top:55%; left:6%; --dur:9s;  --del:1s; font-size:2.2rem">🐾</span>
+      <span style="top:75%; right:12%;--dur:13s; --del:3s">🐾</span>
+      <span style="top:42%; left:45%;--dur:16s; --del:1.5s;font-size:1rem">🐾</span>
     </div>
+    <div class="login-left__blob"></div>
+
+    <div class="login-left__content">
+      <div class="login-brand">
+        <span class="login-brand__paw">🐾</span>
+        <span class="login-brand__name">Toca dos Peludos</span>
+      </div>
+
+      <h1 class="login-left__title">
+        Cada animal<br>merece um <em>lar</em>
+      </h1>
+      <p class="login-left__sub">
+        Acesse o painel administrativo para gerenciar os pedidos de adoção e cuidar de quem mais precisa.
+      </p>
+
+      <div class="login-stats">
+        <div>
+          <span class="login-stat__num">12k+</span>
+          <span class="login-stat__label">Resgatados</span>
+        </div>
+        <div>
+          <span class="login-stat__num">11k+</span>
+          <span class="login-stat__label">Adotados</span>
+        </div>
+        <div>
+          <span class="login-stat__num">2018</span>
+          <span class="login-stat__label">Fundada</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══ LADO DIREITO — formulário ══ -->
+  <section class="login-right">
+    <div class="login-form-wrap">
+
+      <div class="form-head">
+        <span class="form-head__label">Área Administrativa</span>
+        <h2 class="form-head__title">Bem-vindo de volta</h2>
+        <p class="form-head__sub">Entre com suas credenciais para acessar o painel</p>
+      </div>
+
+      {% if erro %}
+        <div class="login-alert">⚠️ {{ erro }}</div>
+      {% endif %}
+
+      <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <div class="field">
+          <label class="field__label" for="username">Usuário</label>
+          <input
+            type="text"
+            id="username"
+            class="field__input"
+            name="username"
+            placeholder="Digite seu usuário"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            class="field__input"
+            name="password"
+            placeholder="••••••••••"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn-login">
+          Entrar no Painel
+          <span class="btn-login__arrow">→</span>
+        </button>
+      </form>
+
+      <div class="login-divider">ou</div>
+
+      <p class="login-back">
+        <a href="{% url 'novo' %}">← Voltar ao site público</a>
+      </p>
+
+    </div>
+  </section>
 
 </body>
 </html>

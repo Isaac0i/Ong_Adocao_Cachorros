@@ -1,181 +1,301 @@
 {% load static %}
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Toca dos Peludos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Math&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'style/forms.css' %}">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulário de Adoção — Toca dos Peludos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'style/forms.css' %}">
 </head>
+<body>
 
-  <body>
-    <nav class="nav">
-        <ul class="nav-list">
-            <li><a href="http://127.0.0.1:8000/">Sobre Nós</a></li>
-            <li><a href="http://127.0.0.1:8000/">Nossos Bichinhos</a></li>
-            <li><a href="forms">Adote Um!</a></li>
-        </ul>
-    </nav>
-        
-    <section class="adocao-hero">
-    <div class="adocao-hero-content">
-        <div class="heart">
-            <!-- SVG coração -->
-            <svg viewBox="0 0 24 24">
-                <path d="M20.8 4.6c-1.5-1.5-4-1.5-5.5 0L12 8l-3.3-3.4c-1.5-1.5-4-1.5-5.5 0s-1.5 4 0 5.5l3.3 3.4L12 20l5.5-6.5 3.3-3.4c1.5-1.5 1.5-4 0-5.5z"/>
-            </svg>
-        </div>
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <a href="{% url 'novo' %}" class="nav__logo">
+      <span class="nav__logo-icon">🐾</span>
+      <span>Toca dos Peludos</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="{% url 'novo' %}">Início</a></li>
+      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+      <li><a href="{% url 'novo' %}#como-funciona">Como Funciona</a></li>
+      <li><a href="{% url 'forms' %}" class="active">Adotar</a></li>
+    </ul>
+    <a href="{% url 'novo' %}#doe" class="btn--nav">Doe Agora 💛</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-        <h1>Formulário de Adoção</h1>
-        <p>Preencha suas informações para dar um lar cheio de amor a um pet 🐾</p>
-    </div>
-</section>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="{% url 'novo' %}">Início</a></li>
+      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+      <li><a href="{% url 'forms' %}">Adotar</a></li>
+      <li><a href="{% url 'novo' %}#doe" class="btn--nav">Doe Agora 💛</a></li>
+    </ul>
+  </div>
 
-    <section class="form-section">
-    <div class="form-card">
-
-        <h2>Seus Dados</h2>
-        <p class="form-subtitle">Preencha todos os campos obrigatórios</p>
-
-    <!--Mensagem que o Formulario foi enviado com Sucesso-->
-    {% if status == '1' %}
-      <div class="alert alert-success">
-        ✅ Formulário enviado com sucesso! Entraremos em contato em breve.
+  <!-- Hero -->
+  <section class="forms-hero">
+    <div class="forms-hero__overlay"></div>
+    <div class="forms-hero__pattern"></div>
+    <div class="container">
+      <div class="forms-hero__content">
+        <div class="forms-hero__badge">🐾 Adoção Responsável</div>
+        <h1 class="forms-hero__title">
+          Dê um lar para quem<br>merece <em>seu amor</em>
+        </h1>
+        <p class="forms-hero__sub">
+          Preencha o formulário abaixo. Nossa equipe entrará em contato em até 48h para dar sequência ao processo de adoção.
+        </p>
       </div>
-    {% endif %}
-    
-    <!--Mensagem de E-mail ou Numero de Telefone Duplicado-->
-    {% if erro %}
-      <div class="alert alert-danger">
-          ⚠️ {{ erro }}
-      </div>
-    {% endif %}
-
-    <form action="{% url 'forms' %}" method='POST' enctype="multipart/form-data"> {% csrf_token %}
-        <label>Nome Completo</label>
-        <input type="text" placeholder="Nome Completo" class="form-control" name="nome">
-        <br>
-        <br>
-        <label>E-mail</label>
-        <input type="email" placeholder="E-mail" class="form-control {% if 'email' in campos_vazios %}is-invalid{% endif %}" name="email">
-        {% if 'email' in campos_vazios %}
-          <div class="invalid-feedback">{{ erro }}</div>
-        {% endif %}
-        <br>
-        <br>
-        <label>Telefone</label>
-        <input type="text" placeholder="(11) 90000-0000" class="form-control {% if 'telefone' in campos_vazios %}is-invalid{% endif %}" name="telefone">
-        {% if 'telefone' in campos_vazios %}
-            <div class="invalid-feedback">{{ erro }}</div>
-        {% endif %}
-        <br>
-        <br>
-        <label>Endereço</label>
-        <input type="text" placeholder="Endereço:" class="form-control" name="endereco">
-        <br>
-        <br>
-        <label>CEP</label>
-        <input type="text" class="form-control" name="cep" placeholder="00000-000" maxlength="9">
-        <br>
-        <br>
-        <label>Quantidade de Pessoas na Família</label>
-        <select class="form-select" name="pessoas_na_familia">
-            <option value="" selected="">Selecione:</option>
-            <option value="1">1 pessoa</option>
-            <option value="2">2 pessoas</option>
-            <option value="3">3 pessoas</option>
-            <option value="4">4 pessoas</option>
-            <option value="5">5 pessoas</option>
-            <option value="acima_5">Acima de 5 pessoas</option>
-        </select>
-        <br>
-        <br>
-        <label>Renda Familiar</label>
-        <select class="form-select" name="renda_familiar">
-          <option value="" selected>Selecione:</option>
-          <option value="ate_2000">R$1.000 á R$2.000</option>
-          <option value="ate_3000">R$2.000 á R$3.000</option>
-          <option value="acima_3000">Acima de R$3.000</option>
-        </select>
-        <br>
-        <br>
-        <label>Tipo de Moradia</label>
-        <select class="form-select" name="tipo_moradia">
-          <option value="" selected>Selecione:</option>
-          <option value="casa">Casa</option>
-          <option value="apartamento">Apartamento</option>
-          <option value="chacara">Chácara</option>
-        </select>
-        <br>
-        <br>
-        <label>Possui outros Pets?</label>
-        <select class="form-select" name="possui_outros_pets">
-          <option value="" selected>Selecione:</option>
-          <option value="sim">Sim</option>
-          <option value="nao">Não</option>
-        </select>
-        <br>
-        <br>
-        <label>Já teve experiência com Pets antes?</label>
-        <select class="form-select" name="experiencia_pets">
-          <option value="" selected>Selecione:</option>
-          <option value="sim">Sim</option>
-          <option value="nao">Não</option>
-        </select>
-        <br>
-        <br>
-        <label>Por que você deseja adotar um Pet?</label>
-        <input type="text" class="form-control" name="motivo_adocao">
-        <br>
-        <br>
-        <label>Documento de Identificação:</label>
-        <input type="file" name="documento" multiple accept="image/*" class="file">
-        <br>
-        <br>
-        <label>Fotos da sua Moradia:</label>
-        <input type="file" name="fotos_moradia" multiple accept="image/*" class="file">
-        <br>
-        <br>
-        <br>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="concordo" id="concordo" required>
-          <label class="form-check-label" for="concordo">
-            Li e estou ciente do <a href="#">Aviso de Privacidade</a> da Toca dos Peludos e autorizo o uso das informações pessoais fornecidas exclusivamente para fins de análise e processamento da minha solicitação de adoção, em conformidade com a Lei Geral de Proteção de Dados (LGPD).
-          </label>
-        </div>
-        <br>
-        <br>
-        <br>
-        <input type="submit" class="btn btn-success" value="Enviar" id="submitBtn">
-    </form>
-
-    <!-- 
-    AVISO DE PRIVACIDADE — TOCA DOS PELUDOS
-    1. Quem somos
-    A Toca dos Peludos é uma ONG dedicada ao resgate e adoção responsável de cães. Levamos a privacidade dos nossos adotantes a sério e nos comprometemos a proteger seus dados pessoais.
-    2. Quais dados coletamos
-    Coletamos as seguintes informações durante o processo de adoção: nome completo, e-mail, telefone, endereço, documento de identificação e fotos da moradia.
-    3. Para que usamos seus dados
-    Suas informações são utilizadas exclusivamente para análise e processamento da sua solicitação de adoção, verificação de idoneidade do adotante e contato durante o processo de adoção.
-    4. Com quem compartilhamos
-    Seus dados não são vendidos, alugados ou compartilhados com terceiros. As informações são acessadas apenas pela equipe responsável pela análise de adoções.
-    5. Por quanto tempo guardamos
-    Seus dados são mantidos pelo período necessário para conclusão do processo de adoção, podendo ser armazenados por até 5 anos para fins de registro.
-    6. Seus direitos (LGPD)
-    Você tem direito a acessar, corrigir ou solicitar a exclusão dos seus dados a qualquer momento, entrando em contato conosco.
-    7. Contato
-    Dúvidas sobre privacidade? Entre em contato: contato@tocadospecludos.org.br
-    -->
-
     </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
-  </body>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
+        <path d="M0 70 C360 0 1080 0 1440 70 L1440 70 L0 70 Z" fill="#FFFBF0"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Formulário -->
+  <div class="form-body">
+    <div class="container">
+
+      {% if status == '1' %}
+        <div class="alert alert-success reveal visible">
+          ✅ Formulário enviado com sucesso! Entraremos em contato em breve.
+        </div>
+      {% endif %}
+      {% if erro %}
+        <div class="alert alert-danger reveal visible">⚠️ {{ erro }}</div>
+      {% endif %}
+
+      <form action="{% url 'forms' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-card reveal">
+
+          <!-- 1. Dados pessoais -->
+          <div class="form-section">
+            <div class="form-section__head">
+              <div class="form-section__icon">👤</div>
+              <div>
+                <p class="form-section__title">Informações Pessoais</p>
+                <p class="form-section__sub">Seus dados para contato</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field field--full">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" class="form-control" name="nome" placeholder="Seu nome completo" required>
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email"
+                  class="form-control {% if 'email' in campos_vazios %}is-invalid{% endif %}"
+                  name="email" placeholder="seu@email.com" required>
+                {% if 'email' in campos_vazios %}<div class="invalid-feedback">{{ erro }}</div>{% endif %}
+              </div>
+              <div class="field">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone"
+                  class="form-control {% if 'telefone' in campos_vazios %}is-invalid{% endif %}"
+                  name="telefone" placeholder="(11) 90000-0000" required>
+                {% if 'telefone' in campos_vazios %}<div class="invalid-feedback">{{ erro }}</div>{% endif %}
+              </div>
+              <div class="field">
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" class="form-control" name="endereco" placeholder="Rua, número, bairro">
+              </div>
+              <div class="field">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" class="form-control" name="cep" placeholder="00000-000" maxlength="9">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Moradia & Família -->
+          <div class="form-section">
+            <div class="form-section__head">
+              <div class="form-section__icon">🏠</div>
+              <div>
+                <p class="form-section__title">Moradia &amp; Família</p>
+                <p class="form-section__sub">Onde o pet vai viver</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="pessoas">Pessoas na Família</label>
+                <select class="form-select" id="pessoas" name="pessoas_na_familia">
+                  <option value="" selected>Selecione…</option>
+                  <option value="1">1 pessoa</option>
+                  <option value="2">2 pessoas</option>
+                  <option value="3">3 pessoas</option>
+                  <option value="4">4 pessoas</option>
+                  <option value="5">5 pessoas</option>
+                  <option value="acima_5">Acima de 5 pessoas</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="renda">Renda Familiar</label>
+                <select class="form-select" id="renda" name="renda_familiar">
+                  <option value="" selected>Selecione…</option>
+                  <option value="ate_2000">R$1.000 a R$2.000</option>
+                  <option value="ate_3000">R$2.000 a R$3.000</option>
+                  <option value="acima_3000">Acima de R$3.000</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="moradia">Tipo de Moradia</label>
+                <select class="form-select" id="moradia" name="tipo_moradia">
+                  <option value="" selected>Selecione…</option>
+                  <option value="casa">Casa</option>
+                  <option value="apartamento">Apartamento</option>
+                  <option value="chacara">Chácara</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Experiência com pets -->
+          <div class="form-section">
+            <div class="form-section__head">
+              <div class="form-section__icon">🐶</div>
+              <div>
+                <p class="form-section__title">Experiência com Pets</p>
+                <p class="form-section__sub">Nos conte um pouco mais</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="outros_pets">Possui outros pets?</label>
+                <select class="form-select" id="outros_pets" name="possui_outros_pets">
+                  <option value="" selected>Selecione…</option>
+                  <option value="sim">Sim</option>
+                  <option value="nao">Não</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="experiencia">Já teve experiência com pets?</label>
+                <select class="form-select" id="experiencia" name="experiencia_pets">
+                  <option value="" selected>Selecione…</option>
+                  <option value="sim">Sim</option>
+                  <option value="nao">Não</option>
+                </select>
+              </div>
+              <div class="field field--full">
+                <label for="motivo">Por que deseja adotar?</label>
+                <input type="text" id="motivo" class="form-control" name="motivo_adocao"
+                  placeholder="Conte um pouco sobre sua motivação…">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Documentação -->
+          <div class="form-section">
+            <div class="form-section__head">
+              <div class="form-section__icon">📄</div>
+              <div>
+                <p class="form-section__title">Documentação</p>
+                <p class="form-section__sub">Imagens para verificação</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label>Documento de Identificação</label>
+                <div class="file-upload">
+                  <input type="file" name="documento" multiple accept="image/*">
+                  <div class="file-upload__icon">📎</div>
+                  <p class="file-upload__text">Clique para selecionar</p>
+                  <p class="file-upload__hint">RG ou CNH • JPG, PNG</p>
+                </div>
+              </div>
+              <div class="field">
+                <label>Fotos da Moradia</label>
+                <div class="file-upload">
+                  <input type="file" name="fotos_moradia" multiple accept="image/*">
+                  <div class="file-upload__icon">🏠</div>
+                  <p class="file-upload__text">Clique para selecionar</p>
+                  <p class="file-upload__hint">Sala, quintal, quarto • JPG, PNG</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. LGPD -->
+          <div class="privacy-check">
+            <input type="checkbox" name="concordo" id="concordo" required>
+            <label for="concordo">
+              Li e estou ciente do <a href="#">Aviso de Privacidade</a> da Toca dos Peludos e autorizo
+              o uso das informações pessoais fornecidas exclusivamente para fins de análise e
+              processamento da minha solicitação de adoção, em conformidade com a
+              <strong>Lei Geral de Proteção de Dados (LGPD)</strong>.
+            </label>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-submit-bar">
+            <p class="form-submit-bar__hint">🔒 Dados protegidos pela LGPD</p>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Enviar Solicitação ❤️
+            </button>
+          </div>
+
+        </div><!-- /form-card -->
+      </form>
+    </div>
+  </div>
+
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    nav.classList.add('scrolled');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+    burger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', open);
+    });
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+      mobileMenu.classList.remove('open'); burger.classList.remove('open');
+    }));
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }), { threshold:.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Masks
+    const cepEl = document.getElementById('cep');
+    if(cepEl) cepEl.addEventListener('input', function(){
+      let v = this.value.replace(/\D/g,'');
+      if(v.length>5) v=v.slice(0,5)+'-'+v.slice(5,8);
+      this.value=v;
+    });
+    const telEl = document.getElementById('telefone');
+    if(telEl) telEl.addEventListener('input', function(){
+      let v=this.value.replace(/\D/g,'');
+      if(v.length>10) v='('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7,11);
+      else if(v.length>6) v='('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);
+      this.value=v;
+    });
+
+    // File label update
+    document.querySelectorAll('.file-upload input[type="file"]').forEach(input => {
+      input.addEventListener('change', function(){
+        const txt = this.closest('.file-upload').querySelector('.file-upload__text');
+        if(txt) txt.textContent = this.files.length > 0
+          ? `${this.files.length} arquivo(s) selecionado(s) ✓`
+          : 'Clique para selecionar';
+      });
+    });
+  </script>
+</body>
 </html>

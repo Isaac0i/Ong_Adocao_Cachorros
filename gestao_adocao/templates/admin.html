@@ -1,102 +1,346 @@
 {% load static %}
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Cadastros</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin — Toca dos Peludos</title>
+  <!-- Mesmas fontes do novo.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'style/style.css' %}">
+</head>
+<body>
 
-  </head>
+  <!-- ═══════════════════════════════════════
+       NAV — estrutura 100% igual ao novo.html
+  ═══════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <span class="nav__logo-icon">🐾</span>
+      <span class="nav__logo-text">Toca dos Peludos</span>
+    </div>
+    <ul class="nav__links">
+      <li><a href="{% url 'novo' %}">Início</a></li>
+      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+      <li><a href="{% url 'forms' %}">Adoção</a></li>
+      <li><a href="{% url 'admin' %}" class="active">Painel</a></li>
+      <li><a href="{% url 'logout' %}" class="link--sair">Sair</a></li>
+    </ul>
+    <a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a>
+    <button class="nav__burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="{% url 'novo' %}">Início</a></li>
+      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+      <li><a href="{% url 'forms' %}">Adoção</a></li>
+      <li><a href="{% url 'admin' %}">Painel Admin</a></li>
+      <li><a href="{% url 'logout' %}">Sair</a></li>
+      <li><a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a></li>
+    </ul>
+  </div>
 
-  <body>
-    <nav class="nav">
-        <ul class="nav-list">
-            <li><a href="#aboutUs">Sobre Nós</a></li>
-            <li><a href="#dogs">Nossos Bichinhos</a></li>
-            <li><a href="#">Adote Um!</a></li>
-            <li><a href="{% url 'logout' %}">Sair</a></li>
-        </ul>
-    </nav>
+  <!-- ═══════════════════════════════════════
+       HERO — mesmo estilo do novo.html
+  ═══════════════════════════════════════════ -->
+  <section class="admin-hero">
+    <div class="admin-hero__overlay"></div>
+    <div class="admin-hero__pattern"></div>
 
-    <h1>Painel Admin</h1>
+    <div class="container">
+      <div class="admin-hero__content">
 
-    <div class="tabela-wrapper">
-        <div class="filtro">
-            <form method="GET" action="{% url 'admin' %}" id="form-filtros">
+        <div class="admin-hero__badge reveal">🔒 Área Administrativa</div>
 
-                <div class="filtros-bar">
-                    
-                    <!-- Campo de pesquisa -->
-                    <input type="text" 
-                        name="pesquisa" 
-                        placeholder="🔍 Pesquisar por nome..." 
-                        class="form-control filtro-pesquisa"
-                        value="{{ pesquisa }}"
-                        oninput="debounceSubmit()">
+        <h1 class="admin-hero__title reveal" style="animation-delay:.1s">
+          Painel de <em>Adoções</em>
+        </h1>
 
-                    <!-- Ordenação -->
-                    <select name="ordem" class="form-select filtro-select" onchange="this.form.submit()">
-                        <option value="id_asc" {% if ordem == 'id_asc' %}selected{% endif %}>ID: ↑ Menor para Maior</option>
-                        <option value="id_desc" {% if ordem == 'id_desc' %}selected{% endif %}>ID: ↓ Maior para Menor</option>
-                        <option value="nome_asc" {% if ordem == 'nome_asc' %}selected{% endif %}>Nome: A → Z</option>
-                        <option value="nome_desc" {% if ordem == 'nome_desc' %}selected{% endif %}>Nome: Z → A</option>
-                    </select>
+        <p class="admin-hero__sub reveal" style="animation-delay:.22s">
+          Gerencie todos os pedidos de adoção da Toca dos Peludos com facilidade e rapidez.
+        </p>
 
-                    <!-- Status -->
-                    <select name="status" class="form-select filtro-select" onchange="this.form.submit()">
-                        <option value="" {% if not status %}selected{% endif %}>Todos</option>
-                        <option value="em_analise" {% if status == 'em_analise' %}selected{% endif %}>⏳ Aguardando Análise</option>
-                        <option value="aprovado" {% if status == 'aprovado' %}selected{% endif %}>✅ Aprovados</option>
-                        <option value="reprovado" {% if status == 'reprovado' %}selected{% endif %}>❌ Reprovados</option>
-                    </select>
-
-                    <!-- Limpar filtros -->
-                    <a href="{% url 'admin' %}" class="btn-limpar">✕ Limpar</a>
-
-                </div>
-
-            </form>
+        <!-- Stats flutuantes — igual ao novo.html -->
+        <div class="admin-hero__stats reveal" style="animation-delay:.34s">
+          <div class="hstat">
+            <span class="hstat__num" id="stat-total" data-count="0">0</span>
+            <span class="hstat__label">Total de cadastros</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__num" id="stat-analise" data-count="0">0</span>
+            <span class="hstat__label">Aguardando análise</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__num" id="stat-aprovado" data-count="0">0</span>
+            <span class="hstat__label">Aprovados</span>
+          </div>
+          <div class="hstat__sep"></div>
+          <div class="hstat">
+            <span class="hstat__num" id="stat-reprovado" data-count="0">0</span>
+            <span class="hstat__label">Reprovados</span>
+          </div>
         </div>
 
-        <section class="infosTable">
-
-            <div class="tableContainer">
-                <table id="admTable" action="{% url 'admin' %}"> {% csrf_token %}
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nome Completo</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Endereço</th>
-                            <th scope="col">Criado em:</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Informações Gerais</th>
-                        </tr>
-                    </thead>
-                    <tbody id="infostbody">
-                        {% for dados in cadastro %}
-                            <tr> 
-                                <th>{{ dados.id }}</th>
-                                <td>{{ dados.nome_completo}}</td>
-                                <td>{{ dados.email }}</td>
-                                <td>{{ dados.telefone }}</td>
-                                <td>{{ dados.endereco }}</td>
-                                <td>{{ dados.criado_em }}</td>
-                                <td>{{ dados.get_status_display }}</td>
-                                <td>
-                                    <a href={% url 'user' dados.id %}>Ver Mais</a>
-                                </td>      
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>    
-        </section>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+
+    <!-- Onda de transição (mesmo do novo.html) -->
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
+        <path d="M0 70 C360 0 1080 0 1440 70 L1440 70 L0 70 Z" fill="#FFFBF0"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTEÚDO PRINCIPAL
+  ═══════════════════════════════════════════ -->
+  <main class="admin-main">
+    <div class="container">
+
+      <!-- Cabeçalho da seção -->
+      <div class="section__header reveal" style="margin-bottom:40px">
+        <span class="section__label">Gestão</span>
+        <h2 class="section__title">Cadastros de <em>Adoção</em></h2>
+        <p class="section__sub">Filtre, pesquise e revise cada solicitação com atenção.</p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filtros-wrapper reveal" style="animation-delay:.05s">
+        <div class="filtros-card">
+          <form method="GET" action="{% url 'admin' %}" id="form-filtros">
+            <div class="filtros-bar">
+
+              <input
+                type="text"
+                name="pesquisa"
+                placeholder="🔍  Pesquisar por nome..."
+                class="filtro-pesquisa"
+                value="{{ pesquisa }}"
+                oninput="debounceSubmit()"
+              >
+
+              <select name="ordem" class="filtro-select" onchange="this.form.submit()">
+                <option value="id_asc"    {% if ordem == 'id_asc'    %}selected{% endif %}>ID ↑ Menor → Maior</option>
+                <option value="id_desc"   {% if ordem == 'id_desc'   %}selected{% endif %}>ID ↓ Maior → Menor</option>
+                <option value="nome_asc"  {% if ordem == 'nome_asc'  %}selected{% endif %}>Nome A → Z</option>
+                <option value="nome_desc" {% if ordem == 'nome_desc' %}selected{% endif %}>Nome Z → A</option>
+              </select>
+
+              <select name="status" class="filtro-select" onchange="this.form.submit()">
+                <option value=""           {% if not status             %}selected{% endif %}>Todos os status</option>
+                <option value="em_analise" {% if status == 'em_analise' %}selected{% endif %}>⏳ Aguardando Análise</option>
+                <option value="aprovado"   {% if status == 'aprovado'   %}selected{% endif %}>✅ Aprovados</option>
+                <option value="reprovado"  {% if status == 'reprovado'  %}selected{% endif %}>❌ Reprovados</option>
+              </select>
+
+              <a href="{% url 'admin' %}" class="btn-limpar">✕ Limpar</a>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Tabela -->
+      <div class="tabela-card reveal" style="animation-delay:.1s">
+
+        <div class="tabela-card__header">
+          <h3 class="tabela-card__title">
+            📋 Solicitações
+            <span class="tabela-count" id="count-label">—</span>
+          </h3>
+        </div>
+
+        <div class="tabela-wrap">
+          <table id="admTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Cadastrado em</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="infostbody">
+              {% for dados in cadastro %}
+                <tr class="table-row">
+                  <td>
+                    <span class="id-pill">{{ dados.id }}</span>
+                  </td>
+                  <td>
+                    <div class="nome-cell">
+                      <div class="nome-cell__avatar">{{ dados.nome_completo|slice:":1"|upper }}</div>
+                      <span class="nome-cell__text">{{ dados.nome_completo }}</span>
+                    </div>
+                  </td>
+                  <td>{{ dados.email }}</td>
+                  <td>{{ dados.telefone }}</td>
+                  <td>{{ dados.endereco }}</td>
+                  <td>{{ dados.criado_em }}</td>
+                  <td>
+                    <span class="status-badge status-{{ dados.status }}">
+                      {% if dados.status == 'em_analise' %}⏳
+                      {% elif dados.status == 'aprovado' %}✅
+                      {% else %}❌{% endif %}
+                      {{ dados.get_status_display }}
+                    </span>
+                  </td>
+                  <td>
+                    <a href="{% url 'user' dados.id %}" class="ver-mais">Ver mais →</a>
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="8">
+                    <div class="empty-state">
+                      <span class="empty-state__icon">🔍</span>
+                      <p class="empty-state__title">Nenhum resultado</p>
+                      <p class="empty-state__sub">Tente ajustar os filtros de busca</p>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- /tabela-card -->
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="admin-footer">
+    🐾 <strong>Toca dos Peludos</strong> &nbsp;·&nbsp; Painel de Administração
+    &nbsp;·&nbsp; <a href="{% url 'novo' %}" style="color:var(--green);font-weight:700;">Voltar ao site</a>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ── 1. NAV — scroll + burger (igual ao novo.js) ── */
+    const nav        = document.getElementById('nav');
+    const burger     = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    burger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        burger.classList.remove('open');
+      });
+    });
+
+    /* ── 2. REVEAL ON SCROLL (igual ao novo.js) ── */
+    const reveals   = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => revealObs.observe(el));
+
+    /* ── 3. CONTAGEM DE LINHAS ── */
+    const rows      = document.querySelectorAll('.table-row');
+    let total = rows.length, analise = 0, aprovado = 0, reprovado = 0;
+
+    rows.forEach(r => {
+      const b = r.querySelector('.status-badge');
+      if (!b) return;
+      if (b.classList.contains('status-em_analise'))  analise++;
+      if (b.classList.contains('status-aprovado'))    aprovado++;
+      if (b.classList.contains('status-reprovado'))   reprovado++;
+    });
+
+    /* ── 4. CONTADOR ANIMADO (igual ao novo.js) ── */
+    function animateCounter(el, target) {
+      const duration  = 1600;
+      const step      = 16;
+      const steps     = duration / step;
+      let current     = 0;
+      const ease      = t => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+
+      const timer = setInterval(() => {
+        current++;
+        const progress = current / steps;
+        el.textContent = Math.round(ease(Math.min(progress,1)) * target).toLocaleString('pt-BR');
+        if (current >= steps) clearInterval(timer);
+      }, step);
+    }
+
+    /* Dispara contadores quando a seção de stats fica visível */
+    const statsEl = document.querySelector('.admin-hero__stats');
+    let counted   = false;
+    const statsObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !counted) {
+          counted = true;
+          animateCounter(document.getElementById('stat-total'),    total);
+          animateCounter(document.getElementById('stat-analise'),  analise);
+          animateCounter(document.getElementById('stat-aprovado'), aprovado);
+          animateCounter(document.getElementById('stat-reprovado'),reprovado);
+          statsObs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    if (statsEl) statsObs.observe(statsEl);
+
+    /* Atualiza label do count */
+    const countLabel = document.getElementById('count-label');
+    if (countLabel) {
+      countLabel.textContent = total + (total === 1 ? ' cadastro' : ' cadastros');
+    }
+
+    /* ── 5. ANIMAÇÃO STAGGERED NAS LINHAS ── */
+    rows.forEach((row, i) => {
+      row.style.opacity   = '0';
+      row.style.transform = 'translateY(12px)';
+      row.style.transition= 'opacity 0.45s ease, transform 0.45s ease';
+      setTimeout(() => {
+        row.style.opacity   = '1';
+        row.style.transform = 'translateY(0)';
+      }, 120 + i * 50);
+    });
+
+    /* ── 6. DEBOUNCE PESQUISA ── */
+    let searchTimer;
+    window.debounceSubmit = function() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        document.getElementById('form-filtros').submit();
+      }, 480);
+    };
+
+  });
+  </script>
+
+</body>
 </html>
