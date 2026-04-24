@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Toca dos Peludos — ONG de Adoção e Doação Animal</title>
   <link rel="stylesheet" href="{% static 'style/novo.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -19,9 +20,10 @@
     <ul class="nav__links">
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#como-funciona">Como Funciona</a></li>
-      <li><a href="#adocao">Adoção</a></li>
+      <li><a href="#adocao">Pets</a></li>
       <li><a href="#depoimentos">Histórias</a></li>
       <li><a href="#contato">Contato</a></li>
+      <li><a href="/forms/">Quero Adotar</a></li>
     </ul>
     <a href="#doe" class="btn btn--nav">Doe Agora 💛</a>
     <button class="nav__burger" id="burger" aria-label="Menu">
@@ -37,6 +39,7 @@
       <li><a href="#adocao">Adoção</a></li>
       <li><a href="#depoimentos">Histórias</a></li>
       <li><a href="#contato">Contato</a></li>
+      <li><a href="/forms/">Quero Adotar</a></li>
       <li><a href="#doe" class="btn btn--nav">Doe Agora 💛</a></li>
     </ul>
   </div>
@@ -170,7 +173,7 @@
   <section class="adocao" id="adocao">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__label">Adoção</p>
+        <p class="section__label">Pets</p>
         <h2 class="section__title">Peludos esperando por você</h2>
         <p class="section__sub">Cada um tem uma história. Talvez a próxima página seja com você.</p>
       </div>
@@ -339,10 +342,6 @@
             <div class="form-group">
               <label>Seu e-mail</label>
               <input type="email" placeholder="seu@email.com" />
-            </div>
-            <div class="form-type">
-              <button type="button" class="type-btn active" data-type="unica">Única</button>
-              <button type="button" class="type-btn" data-type="mensal">Mensal</button>
             </div>
             <button type="submit" class="btn btn--donate-submit">Fazer Doação ❤️</button>
             <p class="doe__security">🔒 Pagamento 100% seguro e transparente</p>

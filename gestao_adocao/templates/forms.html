@@ -12,20 +12,23 @@
 
   <!-- Nav -->
   <nav class="nav" id="nav">
-    <a href="{% url 'novo' %}" class="nav__logo">
-      <span class="nav__logo-icon">🐾</span>
-      <span>Toca dos Peludos</span>
-    </a>
-    <ul class="nav__links">
-      <li><a href="{% url 'novo' %}">Início</a></li>
-      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
-      <li><a href="{% url 'novo' %}#como-funciona">Como Funciona</a></li>
-      <li><a href="{% url 'forms' %}" class="active">Adotar</a></li>
-    </ul>
-    <a href="{% url 'novo' %}#doe" class="btn--nav">Doe Agora 💛</a>
-    <button class="nav__burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+      <a href="{% url 'novo' %}" class="nav__logo">
+        <span class="nav__logo-icon">🐾</span>
+        <span class="nav__logo-text">Toca dos Peludos</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="{% url 'novo' %}">Início</a></li>
+        <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+        <li><a href="{% url 'novo' %}#como-funciona">Como Funciona</a></li>
+        <li><a href="{% url 'novo' %}#adocao">Pets</a></li>
+        <li><a href="{% url 'novo' %}#depoimentos">Histórias</a></li>
+        <li><a href="{% url 'novo' %}#contato">Contato</a></li>
+        <li><a href="{% url 'forms' %}" class="active">Quero Adotar</a></li>
+      </ul>
+      <a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
   </nav>
 
   <!-- Mobile Menu -->
@@ -33,8 +36,12 @@
     <ul>
       <li><a href="{% url 'novo' %}">Início</a></li>
       <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
-      <li><a href="{% url 'forms' %}">Adotar</a></li>
-      <li><a href="{% url 'novo' %}#doe" class="btn--nav">Doe Agora 💛</a></li>
+      <li><a href="{% url 'novo' %}#como-funciona">Como Funciona</a></li>
+      <li><a href="{% url 'novo' %}#adocao">Adoção</a></li>
+      <li><a href="{% url 'novo' %}#depoimentos">Histórias</a></li>
+      <li><a href="{% url 'novo' %}#contato">Contato</a></li>
+      <li><a href="{% url 'forms' %}">Quero Adotar</a></li>
+      <li><a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a></li>
     </ul>
   </div>
 
