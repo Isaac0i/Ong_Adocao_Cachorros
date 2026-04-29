@@ -127,33 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => toast.classList.remove('show'), 3500);
   }
 
-  if (doeForm) {
-    doeForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const activeValor = doeForm.querySelector('.valor-btn.active');
-      const valorInput  = outroValor ? outroValor.value : null;
-      const valorFinal  = valorInput || (activeValor ? activeValor.dataset.valor : null);
-
-      if (!valorFinal) {
-        showToast('⚠️ Escolha ou insira um valor para a doação.');
-        return;
-      }
-
-      // Simulate submission
-      const submitBtn = doeForm.querySelector('[type="submit"]');
-      submitBtn.textContent = 'Processando…';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        showToast(`✅ Doação de R$${valorFinal} registrada! Obrigado ❤️`);
-        doeForm.reset();
-        valorBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
-        submitBtn.textContent = 'Fazer Doação ❤️';
-        submitBtn.disabled = false;
-      }, 1400);
-    });
-  }
-
   if (contatoForm) {
     contatoForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -238,5 +211,130 @@ document.addEventListener('DOMContentLoaded', () => {
   style.textContent = `.nav__links a.active-link { color: var(--green); }
     .nav__links a.active-link::after { width: 100%; }`;
   document.head.appendChild(style);
+
+/* ──────────────────────────────────────
+    11. PIX MODAL — QR Code BRCode/EMV
+  ────────────────────────────────────── */
+  const pixOverlay = document.getElementById('pixOverlay');
+  const pixClose   = document.getElementById('pixClose');
+  const pixCopy    = document.getElementById('pixCopy');
+  let pixCodeAtual = '';
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  function gerarPixPayload(chave, nome, cidade, valor) {
+    function tlv(id, val) {
+      return id + String(val.length).padStart(2, '0') + val;
+    }
+    const gui = tlv('00', 'br.gov.bcb.pix');
+    const key = tlv('01', chave);
+    const mai = tlv('26', gui + key);
+
+    let payload = '';
+    payload += tlv('00', '01');
+    payload += mai;
+    payload += tlv('52', '0000');
+    payload += tlv('53', '986');
+    if (valor) payload += tlv('54', valor.toFixed(2));
+    payload += tlv('58', 'BR');
+    payload += tlv('59', nome.substring(0, 25));
+    payload += tlv('60', cidade.substring(0, 15));
+    payload += tlv('62', tlv('05', '***'));
+    payload += '6304';
+
+    let crc = 0xFFFF;
+    for (let i = 0; i < payload.length; i++) {
+      crc ^= payload.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+      }
+      crc &= 0xFFFF;
+    }
+    return payload + crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  if (pixOverlay) {
+    if (doeForm) {
+      doeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nome  = document.getElementById('doeNome').value.trim();
+        const email = document.getElementById('doeEmail').value.trim();
+
+        if (!nome || !email) {
+          showToast('⚠️ Preencha seu nome e e-mail.');
+          return;
+        }
+
+        const activeValor = doeForm.querySelector('.valor-btn.active');
+        const valorInput  = outroValor ? outroValor.value : null;
+        const valorFinal  = parseFloat(valorInput || (activeValor ? activeValor.dataset.valor : null));
+
+        if (!valorFinal || valorFinal <= 0) {
+          showToast('⚠️ Escolha ou insira um valor para a doação.');
+          return;
+        }
+
+        // Registra no banco de dados
+        fetch('/registrar-doacao/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+          },
+          body: JSON.stringify({ nome: nome, email: email, valor: valorFinal }),
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === 'ok') {
+            showToast('✅ Doação registrada! Obrigado ' + nome + ' ❤️');
+          }
+        })
+        .catch(() => {
+          showToast('⚠️ Erro ao registrar. Tente novamente.');
+        });
+
+        // Gera QR Code e abre modal
+        pixCodeAtual = gerarPixPayload('+5511948097076', 'JULIO CESAR SILVA SANTOS', 'SAO PAULO', valorFinal);
+        document.getElementById('pixValor').textContent = 'R$ ' + valorFinal.toFixed(2).replace('.', ',');
+
+        const qrContainer = document.getElementById('pixQR');
+        qrContainer.innerHTML = '';
+        new QRCode(qrContainer, {
+          text: pixCodeAtual,
+          width: 200,
+          height: 200,
+          colorDark: '#2d6a4f',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+
+        pixOverlay.style.display = 'flex';
+      });
+    }
+
+    pixClose.addEventListener('click', () => pixOverlay.style.display = 'none');
+    pixOverlay.addEventListener('click', (e) => {
+      if (e.target === pixOverlay) pixOverlay.style.display = 'none';
+    });
+
+    pixCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(pixCodeAtual);
+      pixCopy.textContent = 'Copiado ✓ 🐾';
+      setTimeout(() => pixCopy.textContent = 'Copiar Chave 📋', 2000);
+    });
+  }
 
 });

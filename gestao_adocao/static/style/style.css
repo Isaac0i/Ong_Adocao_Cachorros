@@ -498,3 +498,67 @@ tbody td { font-weight:500; }
   .tabela-card  { border-radius:var(--r-md); }
   .filtros-card { border-radius:var(--r-md); }
 }
+
+/* ── Admin Tabs ── */
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.admin-tab {
+  padding: 12px 28px;
+  border: 2px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--card-bg);
+  color: var(--sage);
+  font-family: var(--ff-body);
+  font-weight: 700;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: all var(--ease);
+}
+.admin-tab:hover {
+  border-color: var(--forest-mid);
+  color: var(--forest-mid);
+}
+.admin-tab.active {
+  background: var(--forest-mid);
+  border-color: var(--forest-mid);
+  color: var(--white);
+}
+
+/* ── Doações Stats ── */
+.doe-stat-bar {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+.doe-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.doe-stat-item__label {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.doe-stat-item__value {
+  font-family: var(--ff-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--forest);
+}
+
+/* ── Valor pill ── */
+.valor-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--amber-pale);
+  color: var(--amber-dark);
+  font-weight: 800;
+  font-size: .85rem;
+  border-radius: var(--r-sm);
+}

@@ -72,3 +72,16 @@ class DocumentoIdentificacao(models.Model):
 
     def __str__(self):
         return f'Documento de {self.adotante.nome_completo}'
+    
+class Doacao(models.Model):
+    nome = models.CharField(max_length=200)
+    email = models.EmailField()
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    data_doacao = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.nome} - R${self.valor} - {self.data_doacao.strftime("%d/%m/%Y")}'
+
+    class Meta:
+        verbose_name = 'Doação'
+        verbose_name_plural = 'Doações'

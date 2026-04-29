@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Adotante, FotoMoradia, DocumentoIdentificacao
+from .models import Adotante, FotoMoradia, DocumentoIdentificacao, Doacao
 from django.contrib import messages
 import os
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
+import json
 
 def index(request):
     if request.method == 'GET':
@@ -137,11 +139,16 @@ def lista_cadastros(request):
     if pesquisa:
         cadastros = cadastros.filter(nome_completo__icontains=pesquisa)
 
+    doacoes = Doacao.objects.all().order_by('-data_doacao')
+    total_doado = sum(d.valor for d in doacoes)
+
     return render(request, 'admin.html', {
         'cadastro': cadastros,
         'ordem': ordem,
         'status': status,
         'pesquisa': pesquisa,
+        'doacoes': doacoes,
+        'total_doado': total_doado,
     })
 
 @login_required(login_url='/login/')
@@ -246,3 +253,17 @@ def logout_view(request):
 def novo_front(request):
     if request.method == 'GET':
         return render(request, 'novo.html')
+    
+def registrar_doacao(request):
+    if request.method == 'POST':
+        try:
+            dados = json.loads(request.body)
+            doacao = Doacao.objects.create(
+                nome=dados.get('nome', '').strip().title(),
+                email=dados.get('email', '').strip().lower(),
+                valor=dados.get('valor', 0),
+            )
+            return JsonResponse({'status': 'ok', 'id': doacao.id})
+        except Exception as e:
+            return JsonResponse({'status': 'erro', 'mensagem': str(e)}, status=400)
+    return JsonResponse({'status': 'erro'}, status=405)

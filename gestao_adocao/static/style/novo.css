@@ -1332,3 +1332,163 @@ ul  { list-style:none; }
   .sobre__photo--secondary,
   .sobre__photo--accent  { height: 200px; grid-column: auto; }
 }
+
+/* ── PIX Modal ── */
+.pix-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 43, 35, .55);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.pix-modal {
+  background: var(--white);
+  border-radius: var(--r-xl);
+  padding: 44px 36px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(27,43,35,.4);
+  animation: pixIn .35s var(--ease);
+}
+@keyframes pixIn {
+  from { opacity: 0; transform: scale(.92) translateY(24px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.pix-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--ease);
+}
+.pix-modal__close:hover {
+  background: var(--mint);
+  color: var(--forest-mid);
+}
+
+.pix-modal__icon { font-size: 2.8rem; margin-bottom: 8px; }
+
+.pix-modal__title {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--forest);
+  letter-spacing: -0.3px;
+}
+.pix-modal__sub {
+  color: var(--sage);
+  font-size: .92rem;
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+.pix-modal__valor {
+  font-family: var(--ff-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--forest-mid);
+  margin: 8px 0;
+}
+
+.pix-modal__qr {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pix-modal__qr canvas { border-radius: var(--r-sm); }
+
+.pix-modal__info-box {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin: 16px 0;
+  text-align: left;
+  font-size: .92rem;
+  color: var(--forest);
+}
+.pix-modal__info-box p {
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.pix-modal__info-box strong {
+  color: var(--sage);
+  font-weight: 700;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+
+.pix-modal__copiacola button {
+  width: 100%;
+  padding: 14px 2rem;
+  background: linear-gradient(135deg, var(--forest-mid), var(--forest-light));
+  color: var(--white);
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-family: var(--ff-body);
+  font-weight: 800;
+  font-size: .95rem;
+  letter-spacing: .3px;
+  transition: all var(--ease);
+  box-shadow: 0 4px 16px rgba(45,106,79,.3);
+}
+.pix-modal__copiacola button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45,106,79,.4);
+}
+.pix-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.pix-modal__field label {
+  display: block;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--sage);
+  letter-spacing: .3px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.pix-modal__field input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-family: var(--ff-body);
+  font-size: .9rem;
+  color: var(--forest);
+  background: var(--card-bg);
+  transition: border-color var(--ease);
+}
+.pix-modal__field input:focus {
+  outline: none;
+  border-color: var(--forest-mid);
+}

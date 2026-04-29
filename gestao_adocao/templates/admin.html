@@ -109,6 +109,14 @@
         <p class="section__sub">Filtre, pesquise e revise cada solicitação com atenção.</p>
       </div>
 
+      <!-- Abas -->
+      <div class="admin-tabs reveal" style="animation-delay:.03s">
+        <button class="admin-tab active" data-tab="adocoes">🐾 Adoções</button>
+        <button class="admin-tab" data-tab="doacoes">💛 Doações</button>
+      </div>
+
+      <div class="tab-content" id="tab-adocoes">
+
       <!-- Filtros -->
       <div class="filtros-wrapper reveal" style="animation-delay:.05s">
         <div class="filtros-card">
@@ -214,7 +222,77 @@
 
       </div>
       <!-- /tabela-card -->
+      </div><!-- /tab-adocoes -->
+      <!-- Tab Doações -->
+      <div class="tab-content" id="tab-doacoes" style="display:none">
 
+        <div class="filtros-wrapper reveal visible">
+          <div class="filtros-card">
+            <div class="filtros-bar">
+              <div class="doe-stat-bar">
+                <div class="doe-stat-item">
+                  <span class="doe-stat-item__label">Total arrecadado</span>
+                  <span class="doe-stat-item__value">R$ {{ total_doado|floatformat:2 }}</span>
+                </div>
+                <div class="doe-stat-item">
+                  <span class="doe-stat-item__label">Nº de doações</span>
+                  <span class="doe-stat-item__value">{{ doacoes|length }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabela-card reveal visible">
+          <div class="tabela-card__header">
+            <h3 class="tabela-card__title">
+              💰 Doações Registradas
+              <span class="tabela-count">{{ doacoes|length }} registro{{ doacoes|length|pluralize:"s" }}</span>
+            </h3>
+          </div>
+
+          <div class="tabela-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome</th>
+                  <th>E-mail</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for d in doacoes %}
+                  <tr class="table-row">
+                    <td><span class="id-pill">{{ d.id }}</span></td>
+                    <td>
+                      <div class="nome-cell">
+                        <div class="nome-cell__avatar" style="background:var(--amber)">{{ d.nome|slice:":1"|upper }}</div>
+                        <span class="nome-cell__text">{{ d.nome }}</span>
+                      </div>
+                    </td>
+                    <td>{{ d.email }}</td>
+                    <td><span class="valor-pill">R$ {{ d.valor|floatformat:2 }}</span></td>
+                    <td>{{ d.data_doacao|date:"d/m/Y H:i" }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="5">
+                      <div class="empty-state">
+                        <span class="empty-state__icon">💰</span>
+                        <p class="empty-state__title">Nenhuma doação</p>
+                        <p class="empty-state__sub">As doações aparecerão aqui automaticamente</p>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tab-doacoes -->
     </div>
   </main>
 
@@ -336,6 +414,17 @@
         document.getElementById('form-filtros').submit();
       }, 480);
     };
+    /* ── 7. TABS — Adoções / Doações ── */
+    const tabs = document.querySelectorAll('.admin-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
+      });
+    });
 
   });
   </script>

@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/user/<int:id>/', views.user, name="user"),
     path('login/', views.login_view, name="login"),
     path('logout/', views.logout_view, name="logout"),
-    path('novo/', views.novo_front, name="novo")
+    path('novo/', views.novo_front, name="novo"),
+    path('registrar-doacao/', views.registrar_doacao, name='registrar_doacao'),
 ]

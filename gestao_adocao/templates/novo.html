@@ -337,11 +337,11 @@
             </div>
             <div class="form-group">
               <label>Seu nome</label>
-              <input type="text" placeholder="Como podemos te chamar?" />
+              <input type="text" id="doeNome" placeholder="Como podemos te chamar?" />
             </div>
             <div class="form-group">
               <label>Seu e-mail</label>
-              <input type="email" placeholder="seu@email.com" />
+              <input type="email" id="doeEmail" placeholder="seu@email.com" />
             </div>
             <button type="submit" class="btn btn--donate-submit">Fazer Doação ❤️</button>
             <p class="doe__security">🔒 Pagamento 100% seguro e transparente</p>
@@ -499,7 +499,25 @@
     <span class="toast__icon">✅</span>
     <span class="toast__msg" id="toastMsg">Mensagem enviada!</span>
   </div>
-
+    <!-- Modal PIX --> {% csrf_token %}
+  <div class="pix-modal-overlay" id="pixOverlay" style="display:none">
+    <div class="pix-modal">
+      <button class="pix-modal__close" id="pixClose">✕</button>
+      <div class="pix-modal__icon">📱</div>
+      <h2 class="pix-modal__title">Doe via PIX</h2>
+      <p class="pix-modal__sub">Escaneie o QR Code ou copie a chave abaixo</p>
+      <p class="pix-modal__valor" id="pixValor"></p>    
+      <div class="pix-modal__qr" id="pixQR"></div>
+      <div class="pix-modal__info-box">
+        <p><strong>Nome:</strong> Julio Cesar Silva Santos</p>
+        <p><strong>Chave PIX (Celular):</strong> (11) 94809-7076</p>
+      </div>
+      <div class="pix-modal__copiacola">
+        <button id="pixCopy">Copiar Chave 📋</button>
+      </div>
+    </div>
+  </div>
   <script src="{% static 'js/novo.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
