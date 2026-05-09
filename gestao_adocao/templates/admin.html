@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Admin — Toca dos Peludos</title>
-  <!-- Mesmas fontes do novo.html -->
+  <!-- Mesmas fontes do index.html -->
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'style/style.css' %}">
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════
-       NAV — estrutura 100% igual ao novo.html
+       NAV — estrutura 100% igual ao index.html
   ═══════════════════════════════════════════ -->
   <nav class="nav" id="nav">
     <div class="nav__logo">
@@ -20,11 +20,11 @@
       <span class="nav__logo-text">Toca dos Peludos</span>
     </div>
     <ul class="nav__links">
-      <li><a href="{% url 'novo' %}">Início</a></li>
+      <li><a href="{% url 'index' %}">Início</a></li>
       <li><a href="{% url 'admin' %}" class="active">Painel</a></li>
       <li><a href="{% url 'logout' %}" class="link--sair">Sair</a></li>
     </ul>
-    <a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a>
+    <a href="{% url 'index' %}#doe" class="btn btn--nav">Doe Agora 💛</a>
     <button class="nav__burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -33,17 +33,17 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-      <li><a href="{% url 'novo' %}">Início</a></li>
-      <li><a href="{% url 'novo' %}#sobre">Sobre</a></li>
+      <li><a href="{% url 'index' %}">Início</a></li>
+      <li><a href="{% url 'index' %}#sobre">Sobre</a></li>
       <li><a href="{% url 'forms' %}">Adoção</a></li>
       <li><a href="{% url 'admin' %}">Painel Admin</a></li>
       <li><a href="{% url 'logout' %}">Sair</a></li>
-      <li><a href="{% url 'novo' %}#doe" class="btn btn--nav">Doe Agora 💛</a></li>
+      <li><a href="{% url 'index' %}#doe" class="btn btn--nav">Doe Agora 💛</a></li>
     </ul>
   </div>
 
   <!-- ═══════════════════════════════════════
-       HERO — mesmo estilo do novo.html
+       HERO — mesmo estilo do index.html
   ═══════════════════════════════════════════ -->
   <section class="admin-hero">
     <div class="admin-hero__overlay"></div>
@@ -62,7 +62,7 @@
           Gerencie todos os pedidos de adoção da Toca dos Peludos com facilidade e rapidez.
         </p>
 
-        <!-- Stats flutuantes — igual ao novo.html -->
+        <!-- Stats flutuantes — igual ao index.html -->
         <div class="admin-hero__stats reveal" style="animation-delay:.34s">
           <div class="hstat">
             <span class="hstat__num" id="stat-total" data-count="0">0</span>
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <!-- Onda de transição (mesmo do novo.html) -->
+    <!-- Onda de transição (mesmo do index.html) -->
     <div class="hero-wave">
       <svg viewBox="0 0 1440 70" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;display:block;">
         <path d="M0 70 C360 0 1080 0 1440 70 L1440 70 L0 70 Z" fill="#FFFBF0"/>
@@ -299,7 +299,7 @@
   <!-- Footer -->
   <footer class="admin-footer">
     🐾 <strong>Toca dos Peludos</strong> &nbsp;·&nbsp; Painel de Administração
-    &nbsp;·&nbsp; <a href="{% url 'novo' %}" style="color:var(--green);font-weight:700;">Voltar ao site</a>
+    &nbsp;·&nbsp; <a href="{% url 'index' %}" style="color:var(--green);font-weight:700;">Voltar ao site</a>
   </footer>
 
   <!-- ═══════════════════════════════════════
@@ -308,7 +308,7 @@
   <script>
   document.addEventListener('DOMContentLoaded', () => {
 
-    /* ── 1. NAV — scroll + burger (igual ao novo.js) ── */
+    /* ── 1. NAV — scroll + burger (igual ao index.js) ── */
     const nav        = document.getElementById('nav');
     const burger     = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -330,7 +330,7 @@
       });
     });
 
-    /* ── 2. REVEAL ON SCROLL (igual ao novo.js) ── */
+    /* ── 2. REVEAL ON SCROLL (igual ao index.js) ── */
     const reveals   = document.querySelectorAll('.reveal');
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -355,7 +355,7 @@
       if (b.classList.contains('status-reprovado'))   reprovado++;
     });
 
-    /* ── 4. CONTADOR ANIMADO (igual ao novo.js) ── */
+    /* ── 4. CONTADOR ANIMADO (igual ao index.js) ── */
     function animateCounter(el, target) {
       const duration  = 1600;
       const step      = 16;

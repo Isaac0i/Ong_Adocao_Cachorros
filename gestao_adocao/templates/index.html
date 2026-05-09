@@ -5,13 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Toca dos Peludos — ONG de Adoção e Doação Animal</title>
-  <link rel="stylesheet" href="{% static 'style/novo.css' %}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'style/index.css' %}">
 </head>
 <body>
 
-  <!-- Nav -->
+  <!-- Navegação principal -->
   <nav class="nav" id="nav">
     <div class="nav__logo">
       <span class="nav__logo-icon">🐾</span>
@@ -31,7 +30,7 @@
     </button>
   </nav>
 
-  <!-- Mobile Menu -->
+  <!-- Menu mobile -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="#sobre">Sobre</a></li>
@@ -44,7 +43,7 @@
     </ul>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero com estatísticas -->
   <section class="hero" id="hero">
     <div class="hero__overlay"></div>
     <div class="hero__content">
@@ -95,7 +94,7 @@
     </div>
   </section>
 
-  <!-- Sobre "Quem somos" -->
+  <!-- Quem somos -->
   <section class="sobre" id="sobre">
     <div class="container">
       <div class="sobre__grid">
@@ -129,7 +128,7 @@
     </div>
   </section>
 
-  <!-- Como funciona o processo de resgate,cuidado e adoção -->
+  <!-- Como funciona -->
   <section class="como-funciona" id="como-funciona">
     <div class="container">
       <div class="section__header reveal">
@@ -169,7 +168,7 @@
     </div>
   </section>
 
-  <!-- Adoção -->
+  <!-- Pets para adoção -->
   <section class="adocao" id="adocao">
     <div class="container">
       <div class="section__header reveal">
@@ -254,7 +253,7 @@
     </div>
   </section>
 
-  <!-- Galeria de informações -->
+  <!-- Galeria -->
   <section class="galeria" id="galeria">
     <div class="container">
       <div class="section__header reveal">
@@ -302,7 +301,7 @@
     </div>
   </section>
 
-  <!-- Doação -->
+  <!-- Seção de doação -->
   <section class="doe" id="doe">
     <div class="doe__blob"></div>
     <div class="container">
@@ -351,7 +350,7 @@
     </div>
   </section>
 
-  <!-- Depoimentos - Mensagens de feedback -->
+  <!-- Depoimentos -->
   <section class="depoimentos" id="depoimentos">
     <div class="container">
       <div class="section__header reveal">
@@ -494,12 +493,14 @@
     </div>
   </footer>
 
-  <!-- Mensagem de Sucesso "Formulario enviado" -->
+  <!-- Toast de notificação -->
   <div class="toast" id="toast">
     <span class="toast__icon">✅</span>
     <span class="toast__msg" id="toastMsg">Mensagem enviada!</span>
   </div>
-    <!-- Modal PIX --> {% csrf_token %}
+  {% csrf_token %}
+
+  <!-- Modal PIX -->
   <div class="pix-modal-overlay" id="pixOverlay" style="display:none">
     <div class="pix-modal">
       <button class="pix-modal__close" id="pixClose">✕</button>
@@ -517,7 +518,7 @@
       </div>
     </div>
   </div>
-  <script src="{% static 'js/novo.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>
